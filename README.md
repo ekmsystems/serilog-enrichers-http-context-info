@@ -26,4 +26,5 @@ The `WithUrl()` enricher will add a `Url` property to produced events.
 
 The package includes:
 
- * `WithUrl()` - adds the `Url` for the current web request.
+ * `WithUrl()` - adds the `Url` from the current HttpContext.
+ * `WithRawUrl()` - adds the `RawUrl` from the current HttpContext.

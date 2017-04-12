@@ -25,6 +25,14 @@ The `WithUrl()` enricher will add a `Url` property to produced events.
 ### Included enrichers
 
 The package includes:
-
+ * `WithAnonymousId()` - adds the `AnonymousId` from the current HttpContext.
+ * `WithApplicationPath()` - adds the `ApplicationPath` from the current HttpContext.
+ * `WithAppRelativeCurrentExecutionFilePath()` - adds the `AppRelativeCurrentExecutionFilePath` from the current HttpContext.
+ * `WithContentEncoding()` - adds the `ContentEncoding` from the current HttpContext.
+ * `WithContentLength()` - adds the `ContentLength` from the current HttpContext.
+ * `WithContentType()` - adds the `ContentType` from the current HttpContext.
+ * `WithCurrentExecutionFilePath()` - adds the `CurrentExecutionFilePath` from the current HttpContext.
+ * `WithCurrentExecutionFilePathExtension()` - adds the `CurrentExecutionFilePathExtension` from the current HttpContext.
+ * `WithFilePath()` - adds the `FilePath` from the current HttpContext.
  * `WithUrl()` - adds the `Url` from the current HttpContext.
  * `WithRawUrl()` - adds the `RawUrl` from the current HttpContext.

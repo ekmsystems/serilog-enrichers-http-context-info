@@ -55,6 +55,15 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Enrichers\FilePathEnricherTests.cs" />
+    <Compile Include="Enrichers\CurrentExecutionFilePathExtensionEnricherTests.cs" />
+    <Compile Include="Enrichers\CurrentExecutionFilePathEnricherTests.cs" />
+    <Compile Include="Enrichers\ContentTypeEnricherTests.cs" />
+    <Compile Include="Enrichers\ContentLengthEnricherTests.cs" />
+    <Compile Include="Enrichers\ContentEncodingEnricherTests.cs" />
+    <Compile Include="Enrichers\AppRelativeCurrentExecutionFilePathEnricherTests.cs" />
+    <Compile Include="Enrichers\ApplicationPathEnricherTests.cs" />
+    <Compile Include="Enrichers\AnonymousIdEnricherTests.cs" />
     <Compile Include="Enrichers\RawUrlEnricherTests.cs" />
     <Compile Include="Enrichers\UrlEnricherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

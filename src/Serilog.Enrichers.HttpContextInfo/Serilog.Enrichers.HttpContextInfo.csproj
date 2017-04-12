@@ -45,6 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enrichers\AnonymousIdEnricher.cs" />
+    <Compile Include="Enrichers\ApplicationPathEnricher.cs" />
+    <Compile Include="Enrichers\AppRelativeCurrentExecutionFilePathEnricher.cs" />
+    <Compile Include="Enrichers\ContentEncodingEnricher.cs" />
+    <Compile Include="Enrichers\ContentLengthEnricher.cs" />
+    <Compile Include="Enrichers\ContentTypeEnricher.cs" />
+    <Compile Include="Enrichers\CurrentExecutionFilePathEnricher.cs" />
+    <Compile Include="Enrichers\CurrentExecutionFilePathExtensionEnricher.cs" />
+    <Compile Include="Enrichers\FilePathEnricher.cs" />
     <Compile Include="Enrichers\RawUrlEnricher.cs" />
     <Compile Include="Enrichers\UrlEnricher.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensions.cs" />

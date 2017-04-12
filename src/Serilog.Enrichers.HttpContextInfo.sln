@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Enrichers.HttpContextInfo", "Serilog.Enrichers.HttpContextInfo\Serilog.Enrichers.HttpContextInfo.csproj", "{3F6AF92E-1D10-46D7-BC79-59D3161526C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Enrichers.HttpContextInfo.Tests", "Serilog.Enrichers.HttpContextInfo.Tests\Serilog.Enrichers.HttpContextInfo.Tests.csproj", "{F79F26B5-6FAB-49FD-8583-80C4863137EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F6AF92E-1D10-46D7-BC79-59D3161526C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F6AF92E-1D10-46D7-BC79-59D3161526C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F6AF92E-1D10-46D7-BC79-59D3161526C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F6AF92E-1D10-46D7-BC79-59D3161526C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F79F26B5-6FAB-49FD-8583-80C4863137EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F79F26B5-6FAB-49FD-8583-80C4863137EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F79F26B5-6FAB-49FD-8583-80C4863137EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F79F26B5-6FAB-49FD-8583-80C4863137EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

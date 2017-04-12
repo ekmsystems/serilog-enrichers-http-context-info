@@ -55,6 +55,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Enrichers\RawUrlEnricherTests.cs" />
     <Compile Include="Enrichers\UrlEnricherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support\DelegatingSink.cs" />

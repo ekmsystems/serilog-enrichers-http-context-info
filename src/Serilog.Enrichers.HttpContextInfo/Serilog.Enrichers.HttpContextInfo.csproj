@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enrichers\RawUrlEnricher.cs" />
     <Compile Include="Enrichers\UrlEnricher.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensions.cs" />
     <Compile Include="LogEventPropertyExtensions.cs" />

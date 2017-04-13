@@ -1,6 +1,6 @@
-﻿using System.IO;
-using System.Web;
+﻿using Moq;
 using NUnit.Framework;
+using Serilog.Enrichers;
 using Serilog.Events;
 using Serilog.Tests.Support;
 
@@ -13,27 +13,34 @@ namespace Serilog.Tests.Enrichers
         [SetUp]
         public void SetUp()
         {
-            _request = new HttpRequest("test", "https://serilog.net/my-app", "");
-            _response = new HttpResponse(new StringWriter());
-            HttpContext.Current = new HttpContext(_request, _response);
+            _httpContextProvider = new Mock<IHttpContextProvider>();
+            _httpContextWrapper = new Mock<IHttpContextWrapper>();
+            _httpRequestWrapper = new Mock<IHttpRequestWrapper>();
+            _logger = new LoggerConfiguration()
+                .Enrich.With(new ContentLengthEnricher(_httpContextProvider.Object))
+                .WriteTo.Sink(new DelegatingSink(e => _logEvent = e))
+                .CreateLogger();
+
+            _httpContextProvider.Setup(x => x.GetCurrentContext()).Returns(_httpContextWrapper.Object);
+            _httpContextWrapper.SetupGet(x => x.Request).Returns(_httpRequestWrapper.Object);
         }
 
-        private HttpRequest _request;
-        private HttpResponse _response;
+        private Mock<IHttpContextProvider> _httpContextProvider;
+        private Mock<IHttpContextWrapper> _httpContextWrapper;
+        private Mock<IHttpRequestWrapper> _httpRequestWrapper;
+        private ILogger _logger;
+        private LogEvent _logEvent;
 
         [Test]
         public void ShouldCreateContentLengthProperty()
         {
-            LogEvent evt = null;
-            var log = new LoggerConfiguration()
-                .Enrich.WithContentLength()
-                .WriteTo.Sink(new DelegatingSink(e => evt = e))
-                .CreateLogger();
+            _httpRequestWrapper.SetupGet(x => x.ContentLength).Returns(123);
 
-            log.Information(@"Has a ContentLength property");
+            _logger.Information(@"Has a ContentLength property");
 
-            Assert.NotNull(evt);
-            Assert.NotNull((string) evt.Properties["ContentLength"].LiteralValue());
+            Assert.NotNull(_logEvent);
+            Assert.NotNull(_logEvent.Properties["ContentLength"].LiteralValue());
+            Assert.AreEqual("123", _logEvent.Properties["ContentLength"].LiteralValue());
         }
     }
 }

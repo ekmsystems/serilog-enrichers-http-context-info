@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="Enrichers\AnonymousIdEnricher.cs" />
     <Compile Include="Enrichers\ApplicationPathEnricher.cs" />
-    <Compile Include="Enrichers\AppRelativeCurrentExecutionFilePathEnricher.cs" />
     <Compile Include="Enrichers\ContentEncodingEnricher.cs" />
     <Compile Include="Enrichers\ContentLengthEnricher.cs" />
     <Compile Include="Enrichers\ContentTypeEnricher.cs" />

@@ -8,7 +8,6 @@ namespace Serilog
     {
         string AnonymousID { get; }
         string ApplicationPath { get; }
-        string AppRelativeCurrentExecutionFilePath { get; }
         Encoding ContentEncoding { get; }
         int ContentLength { get; }
         string ContentType { get; }
@@ -30,7 +29,6 @@ namespace Serilog
 
         public string AnonymousID => _httpRequest.AnonymousID;
         public string ApplicationPath => _httpRequest.ApplicationPath;
-        public string AppRelativeCurrentExecutionFilePath => _httpRequest.AppRelativeCurrentExecutionFilePath;
         public Encoding ContentEncoding => _httpRequest.ContentEncoding;
         public int ContentLength => _httpRequest.ContentLength;
         public string ContentType => _httpRequest.ContentType;

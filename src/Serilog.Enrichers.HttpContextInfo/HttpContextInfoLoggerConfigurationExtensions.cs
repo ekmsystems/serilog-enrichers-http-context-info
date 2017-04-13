@@ -19,14 +19,7 @@ namespace Serilog
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
             return enrichmentConfiguration.With(new ApplicationPathEnricher());
         }
-
-        public static LoggerConfiguration WithAppRelativeCurrentExecutionFilePath(
-            this LoggerEnrichmentConfiguration enrichmentConfiguration)
-        {
-            if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new AppRelativeCurrentExecutionFilePathEnricher());
-        }
-
+        
         public static LoggerConfiguration WithContentEncoding(
             this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {

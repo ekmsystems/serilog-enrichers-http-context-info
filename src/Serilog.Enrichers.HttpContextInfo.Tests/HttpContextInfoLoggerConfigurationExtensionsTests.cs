@@ -46,28 +46,7 @@ namespace Serilog.Tests
             // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithApplicationPath());
         }
-
-        [Test]
-        public void WithAppRelativeCurrentExecutionFilePath_ThenLoggerIsCalled_ShouldNotThrowException()
-        {
-            var logger = new LoggerConfiguration()
-                .Enrich.WithAppRelativeCurrentExecutionFilePath()
-                .WriteTo.Sink(new DelegatingSink(e => { }))
-                .CreateLogger();
-
-            Assert.DoesNotThrow(() => logger.Information("LOG"));
-        }
-
-        [Test]
-        public void
-            WithAppRelativeCurrentExecutionFilePath_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException
-            ()
-        {
-            LoggerEnrichmentConfiguration configuration = null;
-            // ReSharper disable once ExpressionIsAlwaysNull
-            Assert.Throws<ArgumentNullException>(() => configuration.WithAppRelativeCurrentExecutionFilePath());
-        }
-
+        
         [Test]
         public void WithContentEncoding_ThenLoggerIsCalled_ShouldNotThrowException()
         {
@@ -222,6 +201,5 @@ namespace Serilog.Tests
             // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithUrl());
         }
-
     }
 }

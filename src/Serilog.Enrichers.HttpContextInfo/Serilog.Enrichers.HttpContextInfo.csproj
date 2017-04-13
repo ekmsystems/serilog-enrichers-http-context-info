@@ -62,6 +62,7 @@
     <Compile Include="Enrichers\PhysicalApplicationPathEnricher.cs" />
     <Compile Include="Enrichers\PhysicalPathEnricher.cs" />
     <Compile Include="Enrichers\RawUrlEnricher.cs" />
+    <Compile Include="Enrichers\RequestEnricher.cs" />
     <Compile Include="Enrichers\RequestTypeEnricher.cs" />
     <Compile Include="Enrichers\TotalBytesEnricher.cs" />
     <Compile Include="Enrichers\UrlEnricher.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Enrichers\UserHostNameEnricher.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensions.cs" />
     <Compile Include="HttpContextProvider.cs" />
+    <Compile Include="HttpRequestProvider.cs" />
     <Compile Include="Wrappers\WrappedHttpContext.cs" />
     <Compile Include="Wrappers\WrappedHttpRequest.cs" />
     <Compile Include="Wrappers\WrappedHttpResponse.cs" />

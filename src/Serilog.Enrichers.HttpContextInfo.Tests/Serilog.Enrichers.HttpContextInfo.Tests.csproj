@@ -63,6 +63,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Enrichers\RequestEnricherTests.cs" />
     <Compile Include="Enrichers\FilePathEnricherTests.cs" />
     <Compile Include="Enrichers\CurrentExecutionFilePathExtensionEnricherTests.cs" />
     <Compile Include="Enrichers\CurrentExecutionFilePathEnricherTests.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Enrichers\UserHostAddressEnricherTests.cs" />
     <Compile Include="Enrichers\UserHostNameEnricherTests.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensionsTests.cs" />
+    <Compile Include="HttpRequestProviderTests.cs" />
     <Compile Include="HttpContextProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support\DelegatingSink.cs" />

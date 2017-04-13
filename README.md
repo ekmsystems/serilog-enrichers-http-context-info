@@ -16,37 +16,14 @@ Then, apply the enricher to you `LoggerConfiguration`:
 
 ```csharp
 Log.Logger = new LoggerConfiguration()
-    .Enrich.WithUrl()
+    .Enrich.WithRequest()
     // ...other configuration...
     .CreateLogger();
 ```
 
-The `WithUrl()` enricher will add a `Url` property to produced events.
+The `WithRequest()` enricher will add the current `HttpRequest` properties to produced events.
 
 ### Included enrichers
 
 The package includes:
- * `WithAnonymousId()` - adds the `AnonymousId` from the current HttpContext.
- * `WithApplicationPath()` - adds the `ApplicationPath` from the current HttpContext.
- * `WithContentEncoding()` - adds the `ContentEncoding` from the current HttpContext.
- * `WithContentLength()` - adds the `ContentLength` from the current HttpContext.
- * `WithContentType()` - adds the `ContentType` from the current HttpContext.
- * `WithCurrentExecutionFilePath()` - adds the `CurrentExecutionFilePath` from the current HttpContext.
- * `WithCurrentExecutionFilePathExtension()` - adds the `CurrentExecutionFilePathExtension` from the current HttpContext.
- * `WithFilePath()` - adds the `FilePath` from the current HttpContext.
- * `WithHttpMethod()` - adds the `HttpMethod` from the current HttpContext.
- * `WithIsAuthenticated()` - adds the `IsAuthenticated` from the current HttpContext.
- * `WithIsLocal()` - adds the `IsLocal` from the current HttpContext.
- * `WithIsSecure()` - adds the `IsSecure` from the current HttpContext.
- * `WithPath()` - adds the `Path` from the current HttpContext.
- * `WithPathInfo()` - adds the `PathInfo` from the current HttpContext.
- * `WithPhysicalApplicationPath()` - adds the `PhysicalApplicationPath` from the current HttpContext.
- * `WithPhysicalPath()` - adds the `PhysicalPath` from the current HttpContext.
- * `WithRawUrl()` - adds the `RawUrl` from the current HttpContext.
- * `WithRequestType()` - adds the `RequestType` from the current HttpContext.
- * `WithTotalBytes()` - adds the `TotalBytes` from the current HttpContext.
- * `WithUrl()` - adds the `Url` from the current HttpContext.
- * `WithUrlReferrer()` - adds the `UrlReferrer` from the current HttpContext.
- * `WithUserAgent()` - adds the `UserAgent` from the current HttpContext.
- * `WithUserHostAddress()` - adds the `UserHostAddress` from the current HttpContext.
- * `WithUserHostName()` - adds the `UserHostName` from the current HttpContext.
+ * `WithRequest()` - adds the `HttpRequest` from the current HttpContext.

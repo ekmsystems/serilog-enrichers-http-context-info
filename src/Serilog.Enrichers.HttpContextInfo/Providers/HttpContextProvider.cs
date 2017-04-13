@@ -1,7 +1,6 @@
 ﻿using System.Web;
-using Serilog.Wrappers;
 
-namespace Serilog
+namespace Serilog.Providers
 {
     public interface IHttpContextProvider
     {
@@ -14,7 +13,7 @@ namespace Serilog
         {
             return HttpContext.Current == null
                 ? null
-                : new WrappedHttpContext(HttpContext.Current);
+                : new HttpContextWrapper(HttpContext.Current);
         }
     }
 }

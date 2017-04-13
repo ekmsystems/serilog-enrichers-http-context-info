@@ -33,8 +33,9 @@ after_build:
   - cmd: nuget pack src\Serilog.Enrichers.HttpContextInfo\Serilog.Enrichers.HttpContextInfo.csproj -IncludeReferencedProjects -Build -Version "%GitVersion_NuGetVersion%" -Prop "target=%CONFIGURATION%"
 
 after_test:
-  -ps: .\src\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -filter:"+[*]*" -target:"src\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe" -targetargs:"/domain:single src\Serilog.Enrichers.HttpContextInfo.Tests\bin\$env:CONFIGURATION\Serilog.Enrichers.HttpContextInfo.Tests.dll" -output:opencoverCoverage.xml
-  -ps: .\src\packages\coveralls.net.0.7.0\tools\csmacnz.coveralls.exe --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
+  -ps: >-
+    .\src\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -filter:"+[*]*" -target:"src\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe" -targetargs:"/domain:single src\Serilog.Enrichers.HttpContextInfo.Tests\bin\$env:CONFIGURATION\Serilog.Enrichers.HttpContextInfo.Tests.dll" -output:opencoverCoverage.xml
+    .\src\packages\coveralls.net.0.7.0\tools\csmacnz.coveralls.exe --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
 
 artifacts:
   - path: '*.nupkg'

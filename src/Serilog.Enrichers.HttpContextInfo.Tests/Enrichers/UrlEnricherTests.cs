@@ -43,7 +43,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.NotNull(_logEvent.Properties["Url"].LiteralValue());
-            Assert.AreEqual(expected, _logEvent.Properties["Url"].LiteralValue());
+            Assert.AreEqual("\"http://serilog.net/\"", _logEvent.Properties["Url"].LiteralValue());
         }
     }
 }

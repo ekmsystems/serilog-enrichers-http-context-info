@@ -11,7 +11,9 @@ namespace Serilog
     {
         public IHttpContextWrapper GetCurrentContext()
         {
-            return new HttpContextWrapper(HttpContext.Current);
+            return HttpContext.Current == null
+                ? null
+                : new HttpContextWrapper(HttpContext.Current);
         }
     }
 }

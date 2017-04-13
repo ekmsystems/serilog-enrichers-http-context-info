@@ -49,14 +49,11 @@
     <Compile Include="HttpContextInfoLoggerConfigurationExtensions.cs" />
     <Compile Include="HttpContextProvider.cs" />
     <Compile Include="HttpRequestProvider.cs" />
-    <Compile Include="Wrappers\WrappedHttpContext.cs" />
-    <Compile Include="Wrappers\WrappedHttpRequest.cs" />
-    <Compile Include="Wrappers\WrappedHttpResponse.cs" />
+    <Compile Include="HttpContextWrapper.cs" />
+    <Compile Include="HttpRequestWrapper.cs" />
+    <Compile Include="HttpResponseWrapper.cs" />
     <Compile Include="LogEventPropertyExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IHttpContextWrapper.cs" />
-    <Compile Include="IHttpRequestWrapper.cs" />
-    <Compile Include="IHttpResponseWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

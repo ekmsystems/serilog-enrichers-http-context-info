@@ -1,5 +1,4 @@
 ﻿using System.Web;
-using Serilog.Wrappers;
 
 namespace Serilog
 {
@@ -14,7 +13,7 @@ namespace Serilog
         {
             return HttpContext.Current == null
                 ? null
-                : new WrappedHttpContext(HttpContext.Current);
+                : new HttpContextWrapper(HttpContext.Current);
         }
     }
 }

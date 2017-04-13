@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 using Serilog.Core;
 using Serilog.Events;
 
@@ -7,15 +6,29 @@ namespace Serilog.Enrichers
 {
     public class FilePathEnricher : ILogEventEnricher
     {
+        private readonly IHttpContextProvider _httpContextProvider;
+
+        public FilePathEnricher()
+            : this(new HttpContextProvider())
+        {
+        }
+
+        internal FilePathEnricher(IHttpContextProvider httpContextProvider)
+        {
+            _httpContextProvider = httpContextProvider;
+        }
+
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
             if (logEvent == null) throw new ArgumentNullException(nameof(logEvent));
 
-            if (HttpContext.Current == null)
+            var httpContext = _httpContextProvider.GetCurrentContext();
+
+            if (httpContext == null)
                 return;
 
             propertyFactory
-                .CreateProperty("FilePath", new ScalarValue(HttpContext.Current.Request.FilePath))
+                .CreateProperty("FilePath", new ScalarValue(httpContext.Request.FilePath))
                 .AddIfAbsent(logEvent);
         }
     }

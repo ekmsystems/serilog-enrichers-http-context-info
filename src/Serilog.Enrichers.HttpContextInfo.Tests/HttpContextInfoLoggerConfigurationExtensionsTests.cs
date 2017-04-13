@@ -3,6 +3,8 @@ using NUnit.Framework;
 using Serilog.Configuration;
 using Serilog.Tests.Support;
 
+// ReSharper disable AssignNullToNotNullAttribute
+
 namespace Serilog.Tests
 {
     [TestFixture]
@@ -24,7 +26,6 @@ namespace Serilog.Tests
         public void WithAnonymousId_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
         {
             LoggerEnrichmentConfiguration configuration = null;
-            // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithAnonymousId());
         }
 
@@ -43,7 +44,6 @@ namespace Serilog.Tests
         public void WithApplicationPath_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
         {
             LoggerEnrichmentConfiguration configuration = null;
-            // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithApplicationPath());
         }
 
@@ -62,7 +62,6 @@ namespace Serilog.Tests
         public void WithContentEncoding_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
         {
             LoggerEnrichmentConfiguration configuration = null;
-            // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithContentEncoding());
         }
 
@@ -81,7 +80,6 @@ namespace Serilog.Tests
         public void WithContentLength_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
         {
             LoggerEnrichmentConfiguration configuration = null;
-            // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithContentLength());
         }
 
@@ -100,7 +98,6 @@ namespace Serilog.Tests
         public void WithContentType_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
         {
             LoggerEnrichmentConfiguration configuration = null;
-            // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithContentType());
         }
 
@@ -120,7 +117,6 @@ namespace Serilog.Tests
             WithCurrentExecutionFilePath_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
         {
             LoggerEnrichmentConfiguration configuration = null;
-            // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithCurrentExecutionFilePath());
         }
 
@@ -141,7 +137,6 @@ namespace Serilog.Tests
             ()
         {
             LoggerEnrichmentConfiguration configuration = null;
-            // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithCurrentExecutionFilePathExtension());
         }
 
@@ -160,8 +155,152 @@ namespace Serilog.Tests
         public void WithFilePath_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
         {
             LoggerEnrichmentConfiguration configuration = null;
-            // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithFilePath());
+        }
+
+        [Test]
+        public void WithHttpMethod_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithHttpMethod()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithHttpMethod_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithHttpMethod());
+        }
+
+        [Test]
+        public void WithIsAuthenticated_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithIsAuthenticated()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithIsAuthenticated_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithIsAuthenticated());
+        }
+
+        [Test]
+        public void WithIsLocal_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithIsLocal()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithIsLocal_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithIsLocal());
+        }
+
+        [Test]
+        public void WithIsSecureConnection_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithIsSecureConnection()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithIsSecureConnection_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithIsSecureConnection());
+        }
+
+        [Test]
+        public void WithPath_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithPath()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithPath_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithPath());
+        }
+
+        [Test]
+        public void WithPathInfo_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithPathInfo()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithPathInfo_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithPathInfo());
+        }
+
+        [Test]
+        public void WithPhysicalApplicationPath_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithPhysicalApplicationPath()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithPhysicalApplicationPath_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException
+            ()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithPhysicalApplicationPath());
+        }
+
+        [Test]
+        public void WithPhysicalPath_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithPhysicalPath()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithPhysicalPath_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithPhysicalPath());
         }
 
         [Test]
@@ -179,8 +318,43 @@ namespace Serilog.Tests
         public void WithRawUrl_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
         {
             LoggerEnrichmentConfiguration configuration = null;
-            // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithRawUrl());
+        }
+
+        [Test]
+        public void WithRequestType_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithRequestType()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithRequestType_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithRequestType());
+        }
+
+        [Test]
+        public void WithTotalBytes_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithTotalBytes()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithTotalBytes_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithTotalBytes());
         }
 
         [Test]
@@ -198,8 +372,79 @@ namespace Serilog.Tests
         public void WithUrl_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
         {
             LoggerEnrichmentConfiguration configuration = null;
-            // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithUrl());
+        }
+
+        [Test]
+        public void WithUrlReferrer_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithUrlReferrer()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithUrlReferrer_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithUrlReferrer());
+        }
+
+        [Test]
+        public void WithUserAgent_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithUserAgent()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithUserAgent_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithUserAgent());
+        }
+
+        [Test]
+        public void WithUserHostAddress_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithUserHostAddress()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithUserHostAddress_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithUserHostAddress());
+        }
+
+        [Test]
+        public void WithUserHostName_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithUserHostName()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithUserHostName_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            Assert.Throws<ArgumentNullException>(() => configuration.WithUserHostName());
         }
     }
 }

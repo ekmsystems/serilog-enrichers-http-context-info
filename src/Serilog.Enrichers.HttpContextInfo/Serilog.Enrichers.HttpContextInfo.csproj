@@ -53,15 +53,32 @@
     <Compile Include="Enrichers\CurrentExecutionFilePathEnricher.cs" />
     <Compile Include="Enrichers\CurrentExecutionFilePathExtensionEnricher.cs" />
     <Compile Include="Enrichers\FilePathEnricher.cs" />
+    <Compile Include="Enrichers\HttpMethodEnricher.cs" />
+    <Compile Include="Enrichers\IsAuthenticatedEnricher.cs" />
+    <Compile Include="Enrichers\IsLocalEnricher.cs" />
+    <Compile Include="Enrichers\IsSecureConnectionEnricher.cs" />
+    <Compile Include="Enrichers\PathEnricher.cs" />
+    <Compile Include="Enrichers\PathInfoEnricher.cs" />
+    <Compile Include="Enrichers\PhysicalApplicationPathEnricher.cs" />
+    <Compile Include="Enrichers\PhysicalPathEnricher.cs" />
     <Compile Include="Enrichers\RawUrlEnricher.cs" />
+    <Compile Include="Enrichers\RequestTypeEnricher.cs" />
+    <Compile Include="Enrichers\TotalBytesEnricher.cs" />
     <Compile Include="Enrichers\UrlEnricher.cs" />
+    <Compile Include="Enrichers\UrlReferrerEnricher.cs" />
+    <Compile Include="Enrichers\UserAgentEnricher.cs" />
+    <Compile Include="Enrichers\UserHostAddressEnricher.cs" />
+    <Compile Include="Enrichers\UserHostNameEnricher.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensions.cs" />
     <Compile Include="HttpContextProvider.cs" />
-    <Compile Include="HttpContextWrapper.cs" />
-    <Compile Include="HttpRequestWrapper.cs" />
-    <Compile Include="HttpResponseWrapper.cs" />
+    <Compile Include="Wrappers\WrappedHttpContext.cs" />
+    <Compile Include="Wrappers\WrappedHttpRequest.cs" />
+    <Compile Include="Wrappers\WrappedHttpResponse.cs" />
     <Compile Include="LogEventPropertyExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IHttpContextWrapper.cs" />
+    <Compile Include="IHttpRequestWrapper.cs" />
+    <Compile Include="IHttpResponseWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -28,7 +28,8 @@ namespace Serilog.Enrichers
                 return;
 
             propertyFactory
-                .CreateProperty("CurrentExecutionFilePathExtension", new ScalarValue(httpContext.Request.CurrentExecutionFilePathExtension))
+                .CreateProperty("CurrentExecutionFilePathExtension",
+                    new ScalarValue(httpContext.Request.CurrentExecutionFilePathExtension))
                 .AddIfAbsent(logEvent);
         }
     }

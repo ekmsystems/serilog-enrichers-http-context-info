@@ -11,7 +11,7 @@ namespace Serilog
     internal class HttpContextWrapper : IHttpContextWrapper
     {
         private readonly HttpContext _httpContext;
-        
+
         public HttpContextWrapper(HttpContext httpContext)
         {
             _httpContext = httpContext;

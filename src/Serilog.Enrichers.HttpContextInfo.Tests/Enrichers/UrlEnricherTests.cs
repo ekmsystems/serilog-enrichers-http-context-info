@@ -13,10 +13,13 @@ namespace Serilog.Tests.Enrichers
         [SetUp]
         public void SetUp()
         {
-            HttpContext.Current = new HttpContext(
-                new HttpRequest("test", "https://serilog.net/", ""),
-                new HttpResponse(new StringWriter()));
+            _request = new HttpRequest("test", "https://serilog.net/my-app", "");
+            _response = new HttpResponse(new StringWriter());
+            HttpContext.Current = new HttpContext(_request, _response);
         }
+
+        private HttpRequest _request;
+        private HttpResponse _response;
 
         [Test]
         public void ShouldCreateUrlProperty()
@@ -31,7 +34,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(evt);
             Assert.NotNull((string) evt.Properties["Url"].LiteralValue());
-            Assert.AreEqual("\"https://serilog.net/\"", (string) evt.Properties["Url"].LiteralValue());
+            Assert.AreEqual("\"https://serilog.net/my-app\"", (string) evt.Properties["Url"].LiteralValue());
         }
     }
 }

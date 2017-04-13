@@ -13,10 +13,13 @@ namespace Serilog.Tests.Enrichers
         [SetUp]
         public void SetUp()
         {
-            HttpContext.Current = new HttpContext(
-                new HttpRequest("test", "https://serilog.net/my-app", ""),
-                new HttpResponse(new StringWriter()));
+            _request = new HttpRequest("test", "https://serilog.net/my-app", "");
+            _response = new HttpResponse(new StringWriter());
+            HttpContext.Current = new HttpContext(_request, _response);
         }
+
+        private HttpRequest _request;
+        private HttpResponse _response;
 
         [Test]
         public void ShouldCreateRawUrlProperty()

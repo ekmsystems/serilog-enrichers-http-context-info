@@ -53,18 +53,3 @@ deploy:
     name: Public NuGet Feed
     on:
       appveyor_repo_tag: true
-
-
-artifacts:
-  - path: '*.nupkg'
-    name: NuGet
-
-deploy:
-  - provider: Environment
-    name: PreRelease NuGet Feed
-    on:
-      branch: master
-  - provider: Environment
-    name: Public NuGet Feed
-    on:
-      appveyor_repo_tag: true

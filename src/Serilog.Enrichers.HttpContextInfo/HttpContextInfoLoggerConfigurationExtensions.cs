@@ -9,67 +9,67 @@ namespace Serilog
         public static LoggerConfiguration WithAnonymousId(this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With<AnonymousIdEnricher>();
+            return enrichmentConfiguration.With(new AnonymousIdEnricher());
         }
 
         public static LoggerConfiguration WithApplicationPath(this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With<ApplicationPathEnricher>();
+            return enrichmentConfiguration.With(new ApplicationPathEnricher());
         }
 
         public static LoggerConfiguration WithAppRelativeCurrentExecutionFilePath(this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With<AppRelativeCurrentExecutionFilePathEnricher>();
+            return enrichmentConfiguration.With(new AppRelativeCurrentExecutionFilePathEnricher());
         }
 
         public static LoggerConfiguration WithContentEncoding(this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With<ContentEncodingEnricher>();
+            return enrichmentConfiguration.With(new ContentEncodingEnricher());
         }
 
         public static LoggerConfiguration WithContentLength(this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With<ContentLengthEnricher>();
+            return enrichmentConfiguration.With(new ContentLengthEnricher());
         }
 
         public static LoggerConfiguration WithContentType(this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With<ContentTypeEnricher>();
+            return enrichmentConfiguration.With(new ContentTypeEnricher());
         }
 
         public static LoggerConfiguration WithCurrentExecutionFilePath(this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With<CurrentExecutionFilePathEnricher>();
+            return enrichmentConfiguration.With(new CurrentExecutionFilePathEnricher());
         }
 
         public static LoggerConfiguration WithCurrentExecutionFilePathExtension(this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With<CurrentExecutionFilePathExtensionEnricher>();
+            return enrichmentConfiguration.With(new CurrentExecutionFilePathExtensionEnricher());
         }
 
         public static LoggerConfiguration WithFilePath(this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With<FilePathEnricher>();
+            return enrichmentConfiguration.With(new FilePathEnricher());
         }
 
         public static LoggerConfiguration WithUrl(this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With<UrlEnricher>();
+            return enrichmentConfiguration.With(new UrlEnricher());
         }
 
         public static LoggerConfiguration WithRawUrl(this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With<RawUrlEnricher>();
+            return enrichmentConfiguration.With(new RawUrlEnricher());
         }
     }
 }

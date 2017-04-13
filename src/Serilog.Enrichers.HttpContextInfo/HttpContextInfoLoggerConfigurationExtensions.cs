@@ -19,7 +19,7 @@ namespace Serilog
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
             return enrichmentConfiguration.With(new ApplicationPathEnricher());
         }
-        
+
         public static LoggerConfiguration WithContentEncoding(
             this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
@@ -62,18 +62,18 @@ namespace Serilog
             return enrichmentConfiguration.With(new FilePathEnricher());
         }
 
-        public static LoggerConfiguration WithUrl(
-            this LoggerEnrichmentConfiguration enrichmentConfiguration)
-        {
-            if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new UrlEnricher());
-        }
-
         public static LoggerConfiguration WithRawUrl(
             this LoggerEnrichmentConfiguration enrichmentConfiguration)
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
             return enrichmentConfiguration.With(new RawUrlEnricher());
+        }
+
+        public static LoggerConfiguration WithUrl(
+            this LoggerEnrichmentConfiguration enrichmentConfiguration)
+        {
+            if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
+            return enrichmentConfiguration.With(new UrlEnricher());
         }
     }
 }

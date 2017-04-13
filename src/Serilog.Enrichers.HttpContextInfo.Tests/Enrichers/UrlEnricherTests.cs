@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Moq;
 using NUnit.Framework;
 using Serilog.Enrichers;
@@ -35,13 +35,15 @@ namespace Serilog.Tests.Enrichers
         [Test]
         public void ShouldCreateUrlProperty()
         {
-            _httpRequestWrapper.SetupGet(x => x.Url).Returns(new Uri("https://serilog.net/my-app"));
+            var expected = new Uri("http://serilog.net/");
+
+            _httpRequestWrapper.SetupGet(x => x.Url).Returns(expected);
 
             _logger.Information(@"Has a Url property");
 
             Assert.NotNull(_logEvent);
             Assert.NotNull(_logEvent.Properties["Url"].LiteralValue());
-            Assert.AreEqual("\"https://serilog.net/my-app\"", _logEvent.Properties["Url"].LiteralValue());
+            Assert.AreEqual(expected, _logEvent.Properties["Url"].LiteralValue());
         }
     }
 }

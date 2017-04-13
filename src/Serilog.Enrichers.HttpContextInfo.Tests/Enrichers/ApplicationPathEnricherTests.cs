@@ -1,4 +1,4 @@
-﻿using Moq;
+using Moq;
 using NUnit.Framework;
 using Serilog.Enrichers;
 using Serilog.Events;
@@ -34,13 +34,15 @@ namespace Serilog.Tests.Enrichers
         [Test]
         public void ShouldCreateApplicationPathProperty()
         {
-            _httpRequestWrapper.SetupGet(x => x.ApplicationPath).Returns("SET");
+            var expected = "SET";
+
+            _httpRequestWrapper.SetupGet(x => x.ApplicationPath).Returns(expected);
 
             _logger.Information(@"Has a ApplicationPath property");
 
             Assert.NotNull(_logEvent);
             Assert.NotNull(_logEvent.Properties["ApplicationPath"].LiteralValue());
-            Assert.AreEqual("\"SET\"", _logEvent.Properties["ApplicationPath"].LiteralValue());
+            Assert.AreEqual($"\"{expected}\"", _logEvent.Properties["ApplicationPath"].LiteralValue());
         }
     }
 }

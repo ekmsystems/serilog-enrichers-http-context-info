@@ -35,13 +35,15 @@ namespace Serilog.Tests.Enrichers
         [Test]
         public void ShouldCreateContentEncodingProperty()
         {
-            _httpRequestWrapper.SetupGet(x => x.ContentEncoding).Returns(Encoding.UTF32);
+            var expected = Encoding.UTF32;
+
+            _httpRequestWrapper.SetupGet(x => x.ContentEncoding).Returns(expected);
 
             _logger.Information(@"Has a ContentEncoding property");
 
             Assert.NotNull(_logEvent);
             Assert.NotNull(_logEvent.Properties["ContentEncoding"].LiteralValue());
-            Assert.AreEqual("System.Text.UTF32Encoding", _logEvent.Properties["ContentEncoding"].LiteralValue());
+            Assert.AreEqual($"{expected}", _logEvent.Properties["ContentEncoding"].LiteralValue());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using Serilog.Configuration;
 using Serilog.Tests.Support;
@@ -46,7 +46,7 @@ namespace Serilog.Tests
             // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithApplicationPath());
         }
-        
+
         [Test]
         public void WithContentEncoding_ThenLoggerIsCalled_ShouldNotThrowException()
         {

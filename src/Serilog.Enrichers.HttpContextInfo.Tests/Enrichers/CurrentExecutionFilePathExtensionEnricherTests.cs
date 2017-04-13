@@ -1,4 +1,4 @@
-﻿using Moq;
+using Moq;
 using NUnit.Framework;
 using Serilog.Enrichers;
 using Serilog.Events;
@@ -34,13 +34,15 @@ namespace Serilog.Tests.Enrichers
         [Test]
         public void ShouldCreateCurrentExecutionFilePathExtensionProperty()
         {
-            _httpRequestWrapper.SetupGet(x => x.CurrentExecutionFilePathExtension).Returns("SET");
+            var expected = "SET";
+
+            _httpRequestWrapper.SetupGet(x => x.CurrentExecutionFilePathExtension).Returns(expected);
 
             _logger.Information(@"Has a CurrentExecutionFilePathExtension property");
 
             Assert.NotNull(_logEvent);
             Assert.NotNull(_logEvent.Properties["CurrentExecutionFilePathExtension"].LiteralValue());
-            Assert.AreEqual("\"SET\"", _logEvent.Properties["CurrentExecutionFilePathExtension"].LiteralValue());
+            Assert.AreEqual($"\"{expected}\"", _logEvent.Properties["CurrentExecutionFilePathExtension"].LiteralValue());
         }
     }
 }

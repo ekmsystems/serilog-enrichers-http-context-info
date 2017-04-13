@@ -1,4 +1,4 @@
-﻿using Moq;
+using Moq;
 using NUnit.Framework;
 using Serilog.Enrichers;
 using Serilog.Events;
@@ -34,13 +34,15 @@ namespace Serilog.Tests.Enrichers
         [Test]
         public void ShouldCreateFilePathProperty()
         {
-            _httpRequestWrapper.SetupGet(x => x.FilePath).Returns("SET");
+            var expected = "SET";
+
+            _httpRequestWrapper.SetupGet(x => x.FilePath).Returns(expected);
 
             _logger.Information(@"Has a FilePath property");
 
             Assert.NotNull(_logEvent);
             Assert.NotNull(_logEvent.Properties["FilePath"].LiteralValue());
-            Assert.AreEqual("\"SET\"", _logEvent.Properties["FilePath"].LiteralValue());
+            Assert.AreEqual($"\"{expected}\"", _logEvent.Properties["FilePath"].LiteralValue());
         }
     }
 }

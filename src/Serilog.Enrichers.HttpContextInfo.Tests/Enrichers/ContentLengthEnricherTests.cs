@@ -1,4 +1,4 @@
-﻿using Moq;
+using Moq;
 using NUnit.Framework;
 using Serilog.Enrichers;
 using Serilog.Events;
@@ -34,13 +34,15 @@ namespace Serilog.Tests.Enrichers
         [Test]
         public void ShouldCreateContentLengthProperty()
         {
-            _httpRequestWrapper.SetupGet(x => x.ContentLength).Returns(123);
+            var expected = 123;
+
+            _httpRequestWrapper.SetupGet(x => x.ContentLength).Returns(expected);
 
             _logger.Information(@"Has a ContentLength property");
 
             Assert.NotNull(_logEvent);
             Assert.NotNull(_logEvent.Properties["ContentLength"].LiteralValue());
-            Assert.AreEqual("123", _logEvent.Properties["ContentLength"].LiteralValue());
+            Assert.AreEqual($"{expected}", _logEvent.Properties["ContentLength"].LiteralValue());
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Serilog.Core;
 using Serilog.Events;
+using Serilog.Providers;
 
 namespace Serilog.Enrichers
 {
@@ -44,7 +45,8 @@ namespace Serilog.Enrichers
                 .CreateProperty("CurrentExecutionFilePath", new ScalarValue(httpRequest.CurrentExecutionFilePath))
                 .AddIfAbsent(logEvent);
             propertyFactory
-                .CreateProperty("CurrentExecutionFilePathExtension", new ScalarValue(httpRequest.CurrentExecutionFilePathExtension))
+                .CreateProperty("CurrentExecutionFilePathExtension",
+                    new ScalarValue(httpRequest.CurrentExecutionFilePathExtension))
                 .AddIfAbsent(logEvent);
             propertyFactory
                 .CreateProperty("FilePath", new ScalarValue(httpRequest.FilePath))

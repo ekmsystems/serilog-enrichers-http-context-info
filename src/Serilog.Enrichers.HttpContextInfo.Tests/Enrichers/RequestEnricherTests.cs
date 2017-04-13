@@ -4,6 +4,7 @@ using Moq;
 using NUnit.Framework;
 using Serilog.Enrichers;
 using Serilog.Events;
+using Serilog.Providers;
 using Serilog.Tests.Support;
 
 namespace Serilog.Tests.Enrichers

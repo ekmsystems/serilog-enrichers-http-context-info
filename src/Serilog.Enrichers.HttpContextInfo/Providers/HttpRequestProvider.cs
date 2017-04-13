@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace Serilog
+namespace Serilog.Providers
 {
     public interface IHttpRequestProvider
     {

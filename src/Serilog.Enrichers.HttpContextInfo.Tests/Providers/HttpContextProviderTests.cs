@@ -2,8 +2,9 @@
 using System.Text;
 using System.Web;
 using NUnit.Framework;
+using Serilog.Providers;
 
-namespace Serilog.Tests
+namespace Serilog.Tests.Providers
 {
     [TestFixture]
     [Parallelizable]

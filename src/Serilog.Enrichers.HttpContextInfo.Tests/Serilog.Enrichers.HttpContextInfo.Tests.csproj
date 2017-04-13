@@ -64,30 +64,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Enrichers\RequestEnricherTests.cs" />
-    <Compile Include="Enrichers\FilePathEnricherTests.cs" />
-    <Compile Include="Enrichers\CurrentExecutionFilePathExtensionEnricherTests.cs" />
-    <Compile Include="Enrichers\CurrentExecutionFilePathEnricherTests.cs" />
-    <Compile Include="Enrichers\ContentTypeEnricherTests.cs" />
-    <Compile Include="Enrichers\ContentLengthEnricherTests.cs" />
-    <Compile Include="Enrichers\ContentEncodingEnricherTests.cs" />
-    <Compile Include="Enrichers\ApplicationPathEnricherTests.cs" />
-    <Compile Include="Enrichers\AnonymousIdEnricherTests.cs" />
-    <Compile Include="Enrichers\HttpMethodEnricherTests.cs" />
-    <Compile Include="Enrichers\IsAuthenticatedEnricherTests.cs" />
-    <Compile Include="Enrichers\IsLocalEnricherTests.cs" />
-    <Compile Include="Enrichers\IsSecureConnectionEnricherTests.cs" />
-    <Compile Include="Enrichers\PathEnricherTests.cs" />
-    <Compile Include="Enrichers\PathInfoEnricherTests.cs" />
-    <Compile Include="Enrichers\PhysicalApplicationPathEnricherTests.cs" />
-    <Compile Include="Enrichers\PhysicalPathEnricherTests.cs" />
-    <Compile Include="Enrichers\RawUrlEnricherTests.cs" />
-    <Compile Include="Enrichers\RequestTypeEnricherTests.cs" />
-    <Compile Include="Enrichers\TotalBytesEnricherTests.cs" />
-    <Compile Include="Enrichers\UrlEnricherTests.cs" />
-    <Compile Include="Enrichers\UrlReferrerEnricherTests.cs" />
-    <Compile Include="Enrichers\UserAgentEnricherTests.cs" />
-    <Compile Include="Enrichers\UserHostAddressEnricherTests.cs" />
-    <Compile Include="Enrichers\UserHostNameEnricherTests.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensionsTests.cs" />
     <Compile Include="HttpRequestProviderTests.cs" />
     <Compile Include="HttpContextProviderTests.cs" />

@@ -66,6 +66,7 @@
     <Compile Include="Enrichers\AnonymousIdEnricherTests.cs" />
     <Compile Include="Enrichers\RawUrlEnricherTests.cs" />
     <Compile Include="Enrichers\UrlEnricherTests.cs" />
+    <Compile Include="HttpContextProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support\DelegatingSink.cs" />
     <Compile Include="Support\Extensions.cs" />

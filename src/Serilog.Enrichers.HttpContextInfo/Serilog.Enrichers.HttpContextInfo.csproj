@@ -57,6 +57,10 @@
     <Compile Include="Enrichers\RawUrlEnricher.cs" />
     <Compile Include="Enrichers\UrlEnricher.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensions.cs" />
+    <Compile Include="HttpContextProvider.cs" />
+    <Compile Include="HttpContextWrapper.cs" />
+    <Compile Include="HttpRequestWrapper.cs" />
+    <Compile Include="HttpResponseWrapper.cs" />
     <Compile Include="LogEventPropertyExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

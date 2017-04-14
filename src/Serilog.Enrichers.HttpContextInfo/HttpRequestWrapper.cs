@@ -6,6 +6,7 @@ namespace Serilog
 {
     public interface IHttpRequestWrapper
     {
+        string[] AcceptTypes { get; }
         string AnonymousID { get; }
         string ApplicationPath { get; }
         Encoding ContentEncoding { get; }
@@ -41,6 +42,7 @@ namespace Serilog
             _httpRequest = httpRequest;
         }
 
+        public string[] AcceptTypes => _httpRequest.AcceptTypes;
         public string AnonymousID => _httpRequest.AnonymousID;
         public string ApplicationPath => _httpRequest.ApplicationPath;
         public Encoding ContentEncoding => _httpRequest.ContentEncoding;

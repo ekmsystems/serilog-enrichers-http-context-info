@@ -32,6 +32,18 @@ namespace Serilog.Tests.Enrichers
         private LogEvent _logEvent;
 
         [Test]
+        public void ShouldCreateRequestAcceptTypesProperty()
+        {
+            _httpRequestWrapper.SetupGet(x => x.AcceptTypes).Returns(new[] {"Type1", "Type2"});
+
+            _logger.Information(@"Has a Request.AcceptTypes property");
+
+            Assert.NotNull(_logEvent);
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.AcceptTypes"));
+            Assert.AreEqual("[\"Type1\", \"Type2\"]", _logEvent.Properties["Request.AcceptTypes"].LiteralValue());
+        }
+
+        [Test]
         public void ShouldCreateRequestAnonymousIDProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.AnonymousID).Returns("SET");

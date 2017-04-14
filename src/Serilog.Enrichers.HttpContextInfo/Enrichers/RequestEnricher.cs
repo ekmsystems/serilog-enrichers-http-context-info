@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Providers;
@@ -26,6 +28,9 @@ namespace Serilog.Enrichers
             if (httpRequest == null)
                 return;
 
+            propertyFactory
+                .CreateProperty("Request.AcceptTypes", CreateSequence(httpRequest.AcceptTypes, x => x))
+                .AddIfAbsent(logEvent);
             propertyFactory
                 .CreateProperty("Request.AnonymousID", new ScalarValue(httpRequest.AnonymousID))
                 .AddIfAbsent(logEvent);
@@ -99,6 +104,13 @@ namespace Serilog.Enrichers
             propertyFactory
                 .CreateProperty("Request.UserHostName", new ScalarValue(httpRequest.UserHostName))
                 .AddIfAbsent(logEvent);
+        }
+
+        private static SequenceValue CreateSequence<TSource, TDest>(
+            IEnumerable<TSource> values,
+            Func<TSource, TDest> converter)
+        {
+            return new SequenceValue(values.Select(x => new ScalarValue(converter(x))));
         }
     }
 }

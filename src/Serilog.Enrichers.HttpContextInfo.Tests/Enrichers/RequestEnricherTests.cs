@@ -52,6 +52,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.AnonymousID"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.AnonymousID"].LiteralValue());
         }
 
 
@@ -64,6 +65,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.ApplicationPath"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.ApplicationPath"].LiteralValue());
         }
 
         [Test]
@@ -75,6 +77,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.ContentEncoding"));
+            Assert.AreEqual("System.Text.UTF32Encoding", _logEvent.Properties["Request.ContentEncoding"].LiteralValue());
         }
 
 
@@ -87,6 +90,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.ContentLength"));
+            Assert.AreEqual("123", _logEvent.Properties["Request.ContentLength"].LiteralValue());
         }
 
 
@@ -99,6 +103,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.ContentType"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.ContentType"].LiteralValue());
         }
 
 
@@ -111,6 +116,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.CurrentExecutionFilePathExtension"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.CurrentExecutionFilePathExtension"].LiteralValue());
         }
 
         [Test]
@@ -122,6 +128,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.CurrentExecutionFilePath"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.CurrentExecutionFilePath"].LiteralValue());
         }
 
 
@@ -134,6 +141,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.FilePath"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.FilePath"].LiteralValue());
         }
 
 
@@ -146,6 +154,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.HttpMethod"));
+            Assert.AreEqual("\"GET\"", _logEvent.Properties["Request.HttpMethod"].LiteralValue());
         }
 
 
@@ -158,6 +167,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.IsAuthenticated"));
+            Assert.AreEqual("True", _logEvent.Properties["Request.IsAuthenticated"].LiteralValue());
         }
 
 
@@ -170,6 +180,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.IsLocal"));
+            Assert.AreEqual("True", _logEvent.Properties["Request.IsLocal"].LiteralValue());
         }
 
 
@@ -182,6 +193,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.IsSecureConnection"));
+            Assert.AreEqual("True", _logEvent.Properties["Request.IsSecureConnection"].LiteralValue());
         }
 
 
@@ -194,6 +206,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.PathInfo"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.PathInfo"].LiteralValue());
         }
 
 
@@ -206,6 +219,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Path"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.Path"].LiteralValue());
         }
 
 
@@ -218,6 +232,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.PhysicalApplicationPath"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.PhysicalApplicationPath"].LiteralValue());
         }
 
 
@@ -230,6 +245,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.PhysicalPath"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.PhysicalPath"].LiteralValue());
         }
 
 
@@ -242,6 +258,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.RawUrl"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.RawUrl"].LiteralValue());
         }
 
 
@@ -254,18 +271,20 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.RequestType"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.RequestType"].LiteralValue());
         }
 
 
         [Test]
         public void ShouldCreateRequestTotalBytesProperty()
         {
-            _httpRequestWrapper.SetupGet(x => x.TotalBytes).Returns(0);
+            _httpRequestWrapper.SetupGet(x => x.TotalBytes).Returns(100);
 
             _logger.Information(@"Has a Request.TotalBytes property");
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.TotalBytes"));
+            Assert.AreEqual("100", _logEvent.Properties["Request.TotalBytes"].LiteralValue());
         }
 
 
@@ -278,6 +297,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Url"));
+            Assert.AreEqual("\"http://serilog.net/\"", _logEvent.Properties["Request.Url"].LiteralValue());
         }
 
 
@@ -290,6 +310,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.UrlReferrer"));
+            Assert.AreEqual("\"http://serilog.net/\"", _logEvent.Properties["Request.UrlReferrer"].LiteralValue());
         }
 
 
@@ -302,6 +323,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.UserAgent"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.UserAgent"].LiteralValue());
         }
 
 
@@ -314,6 +336,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.UserHostAddress"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.UserHostAddress"].LiteralValue());
         }
 
 
@@ -326,6 +349,7 @@ namespace Serilog.Tests.Enrichers
 
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.UserHostName"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.UserHostName"].LiteralValue());
         }
     }
 }

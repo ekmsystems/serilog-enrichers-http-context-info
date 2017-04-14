@@ -23,14 +23,17 @@ namespace Serilog
                 ? Enumerable.Empty<LogEventProperty>()
                 : typeof(T)
                     .GetProperties(BindingFlags.Public | BindingFlags.GetProperty | BindingFlags.Instance)
-                    .Select(propertyInfo => CreateFromPropertyInfo(propertyInfo, obj));
+                    .Select(propertyInfo => CreateFromPropertyInfo(propertyInfo, obj))
+                    .Where(x => x != null);
         }
 
         private LogEventProperty CreateFromPropertyInfo(PropertyInfo propertyInfo, object obj)
         {
             var propertyName = GetPropertyName(propertyInfo);
             var value = GetPropertyValue(propertyInfo, obj);
-            return _propertyFactory.CreateProperty(propertyName, new ScalarValue(value));
+            return value == null 
+                ? null 
+                : _propertyFactory.CreateProperty(propertyName, new ScalarValue(value));
         }
 
         private string GetPropertyName(PropertyInfo propertyInfo)

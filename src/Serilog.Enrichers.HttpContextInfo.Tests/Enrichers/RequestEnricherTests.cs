@@ -32,288 +32,288 @@ namespace Serilog.Tests.Enrichers
         private LogEvent _logEvent;
 
         [Test]
-        public void ShouldCreateAnonymousIDProperty()
+        public void ShouldCreateRequestAnonymousIDProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.AnonymousID).Returns("SET");
 
-            _logger.Information(@"Has a AnonymousID property");
+            _logger.Information(@"Has a Request.AnonymousID property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["AnonymousID"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.AnonymousID"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateApplicationPathProperty()
+        public void ShouldCreateRequestApplicationPathProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.ApplicationPath).Returns("SET");
 
-            _logger.Information(@"Has a ApplicationPath property");
+            _logger.Information(@"Has a Request.ApplicationPath property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["ApplicationPath"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.ApplicationPath"].LiteralValue());
         }
 
         [Test]
-        public void ShouldCreateContentEncodingProperty()
+        public void ShouldCreateRequestContentEncodingProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.ContentEncoding).Returns(Encoding.UTF32);
 
-            _logger.Information(@"Has a ContentEncoding property");
+            _logger.Information(@"Has a Request.ContentEncoding property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["ContentEncoding"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.ContentEncoding"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateContentLengthProperty()
+        public void ShouldCreateRequestContentLengthProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.ContentLength).Returns(123);
 
-            _logger.Information(@"Has a ContentLength property");
+            _logger.Information(@"Has a Request.ContentLength property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["ContentLength"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.ContentLength"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateContentTypeProperty()
+        public void ShouldCreateRequestContentTypeProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.ContentType).Returns("SET");
 
-            _logger.Information(@"Has a ContentType property");
+            _logger.Information(@"Has a Request.ContentType property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["ContentType"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.ContentType"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateCurrentExecutionFilePathExtensionProperty()
+        public void ShouldCreateRequestCurrentExecutionFilePathExtensionProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.CurrentExecutionFilePathExtension).Returns("SET");
 
-            _logger.Information(@"Has a CurrentExecutionFilePathExtension property");
+            _logger.Information(@"Has a Request.CurrentExecutionFilePathExtension property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["CurrentExecutionFilePathExtension"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.CurrentExecutionFilePathExtension"].LiteralValue());
         }
 
         [Test]
-        public void ShouldCreateCurrentExecutionFilePathProperty()
+        public void ShouldCreateRequestCurrentExecutionFilePathProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.CurrentExecutionFilePath).Returns("SET");
 
-            _logger.Information(@"Has a CurrentExecutionFilePath property");
+            _logger.Information(@"Has a Request.CurrentExecutionFilePath property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["CurrentExecutionFilePath"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.CurrentExecutionFilePath"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateFilePathProperty()
+        public void ShouldCreateRequestFilePathProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.FilePath).Returns("SET");
 
-            _logger.Information(@"Has a FilePath property");
+            _logger.Information(@"Has a Request.FilePath property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["FilePath"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.FilePath"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateHttpMethodProperty()
+        public void ShouldCreateRequestHttpMethodProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.HttpMethod).Returns("GET");
 
-            _logger.Information(@"Has a HttpMethod property");
+            _logger.Information(@"Has a Request.HttpMethod property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["HttpMethod"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.HttpMethod"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateIsAuthenticatedProperty()
+        public void ShouldCreateRequestIsAuthenticatedProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.IsAuthenticated).Returns(true);
 
-            _logger.Information(@"Has a IsAuthenticated property");
+            _logger.Information(@"Has a Request.IsAuthenticated property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["IsAuthenticated"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.IsAuthenticated"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateIsLocalProperty()
+        public void ShouldCreateRequestIsLocalProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.IsLocal).Returns(true);
 
-            _logger.Information(@"Has a IsLocal property");
+            _logger.Information(@"Has a Request.IsLocal property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["IsLocal"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.IsLocal"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateIsSecureConnectionProperty()
+        public void ShouldCreateRequestIsSecureConnectionProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.IsSecureConnection).Returns(true);
 
-            _logger.Information(@"Has a IsSecureConnection property");
+            _logger.Information(@"Has a Request.IsSecureConnection property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["IsSecureConnection"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.IsSecureConnection"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreatePathInfoProperty()
+        public void ShouldCreateRequestPathInfoProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.PathInfo).Returns("SET");
 
-            _logger.Information(@"Has a PathInfo property");
+            _logger.Information(@"Has a Request.PathInfo property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["PathInfo"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.PathInfo"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreatePathProperty()
+        public void ShouldCreateRequestPathProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.Path).Returns("SET");
 
-            _logger.Information(@"Has a Path property");
+            _logger.Information(@"Has a Request.Path property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["Path"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.Path"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreatePhysicalApplicationPathProperty()
+        public void ShouldCreateRequestPhysicalApplicationPathProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.PhysicalApplicationPath).Returns("SET");
 
-            _logger.Information(@"Has a PhysicalApplicationPath property");
+            _logger.Information(@"Has a Request.PhysicalApplicationPath property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["PhysicalApplicationPath"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.PhysicalApplicationPath"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreatePhysicalPathProperty()
+        public void ShouldCreateRequestPhysicalPathProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.PhysicalPath).Returns("SET");
 
-            _logger.Information(@"Has a PhysicalPath property");
+            _logger.Information(@"Has a Request.PhysicalPath property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["PhysicalPath"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.PhysicalPath"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateRawUrlProperty()
+        public void ShouldCreateRequestRawUrlProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.RawUrl).Returns("SET");
 
-            _logger.Information(@"Has a RawUrl property");
+            _logger.Information(@"Has a Request.RawUrl property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["RawUrl"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.RawUrl"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateRequestTypeProperty()
+        public void ShouldCreateRequestRequestTypeProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.RequestType).Returns("SET");
 
-            _logger.Information(@"Has a RequestType property");
+            _logger.Information(@"Has a Request.RequestType property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["RequestType"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.RequestType"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateTotalBytesProperty()
+        public void ShouldCreateRequestTotalBytesProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.TotalBytes).Returns(0);
 
-            _logger.Information(@"Has a TotalBytes property");
+            _logger.Information(@"Has a Request.TotalBytes property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["TotalBytes"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.TotalBytes"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateUrlProperty()
+        public void ShouldCreateRequestUrlProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.Url).Returns(new Uri("http://serilog.net/"));
 
-            _logger.Information(@"Has a Url property");
+            _logger.Information(@"Has a Request.Url property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["Url"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.Url"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateUrlReferrerProperty()
+        public void ShouldCreateRequestUrlReferrerProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.UrlReferrer).Returns(new Uri("http://serilog.net/"));
 
-            _logger.Information(@"Has a UrlReferrer property");
+            _logger.Information(@"Has a Request.UrlReferrer property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["UrlReferrer"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.UrlReferrer"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateUserAgentProperty()
+        public void ShouldCreateRequestUserAgentProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.UserAgent).Returns("SET");
 
-            _logger.Information(@"Has a UserAgent property");
+            _logger.Information(@"Has a Request.UserAgent property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["UserAgent"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.UserAgent"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateUserHostAddressProperty()
+        public void ShouldCreateRequestUserHostAddressProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.UserHostAddress).Returns("SET");
 
-            _logger.Information(@"Has a UserHostAddress property");
+            _logger.Information(@"Has a Request.UserHostAddress property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["UserHostAddress"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.UserHostAddress"].LiteralValue());
         }
 
 
         [Test]
-        public void ShouldCreateUserHostNameProperty()
+        public void ShouldCreateRequestUserHostNameProperty()
         {
             _httpRequestWrapper.SetupGet(x => x.UserHostName).Returns("SET");
 
-            _logger.Information(@"Has a UserHostName property");
+            _logger.Information(@"Has a Request.UserHostName property");
 
             Assert.NotNull(_logEvent);
-            Assert.NotNull(_logEvent.Properties["UserHostName"].LiteralValue());
+            Assert.NotNull(_logEvent.Properties["Request.UserHostName"].LiteralValue());
         }
     }
 }

@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="Enrichers\RequestEnricher.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensions.cs" />
+    <Compile Include="HttpFileCollectionWrapper.cs" />
+    <Compile Include="HttpPostedFileWrapper.cs" />
     <Compile Include="ObjectToLogEventPropertyBuilder.cs" />
     <Compile Include="Providers\HttpContextProvider.cs" />
     <Compile Include="Providers\HttpRequestProvider.cs" />

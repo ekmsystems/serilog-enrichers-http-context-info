@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Text;
 using Moq;
 using NUnit.Framework;
@@ -31,6 +32,20 @@ namespace Serilog.Tests.Enrichers
         private Mock<IHttpRequestWrapper> _httpRequestWrapper;
         private ILogger _logger;
         private LogEvent _logEvent;
+
+        private static Mock<IHttpPostedFileWrapper> CreateMockHttpPostedFile(
+            string filename, 
+            int contentLength,
+            string contentType)
+        {
+            var mock = new Mock<IHttpPostedFileWrapper>();
+
+            mock.SetupGet(x => x.FileName).Returns(filename);
+            mock.SetupGet(x => x.ContentLength).Returns(contentLength);
+            mock.SetupGet(x => x.ContentType).Returns(contentType);
+
+            return mock;
+        }
 
         [Test]
         public void ShouldCreateRequestAcceptTypesProperty()
@@ -270,6 +285,40 @@ namespace Serilog.Tests.Enrichers
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.UserHostName"));
             Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.UserHostName"].LiteralValue());
+        }
+
+        [Test]
+        public void ShouldCreateRequestFilesProperties()
+        {
+            var collection = new Mock<IHttpFileCollectionWrapper>();
+            var files = new[]
+            {
+                CreateMockHttpPostedFile("test1.aspx", 1, "content-type-1"),
+                CreateMockHttpPostedFile("test2.aspx", 2, "content-type-2"),
+                CreateMockHttpPostedFile("test3.aspx", 3, "content-type-3")
+            };
+
+            _httpRequestWrapper.SetupGet(x => x.Files).Returns(collection.Object);
+            collection.SetupGet(x => x.AllKeys).Returns(files.Select(x => x.Object.FileName).ToArray());
+            collection
+                .Setup(x => x.Get(It.IsAny<string>()))
+                .Returns((string key) => files.Single(x => x.Object.FileName == key).Object);
+
+            _logger.Information(@"Has Request.Form properties");
+
+            Assert.IsNotNull(_logEvent);
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Files[test1.aspx].FileName"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Files[test2.aspx].FileName"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Files[test3.aspx].FileName"));
+            Assert.AreEqual("test1.aspx", _logEvent.Properties["Request.Files[test1.aspx].FileName"].LiteralValue());
+            Assert.AreEqual(1, _logEvent.Properties["Request.Files[test1.aspx].ContentLength"].LiteralValue());
+            Assert.AreEqual("content-type-1", _logEvent.Properties["Request.Files[test1.aspx].ContentType"].LiteralValue());
+            Assert.AreEqual("test2.aspx", _logEvent.Properties["Request.Files[test2.aspx].FileName"].LiteralValue());
+            Assert.AreEqual(2, _logEvent.Properties["Request.Files[test2.aspx].ContentLength"].LiteralValue());
+            Assert.AreEqual("content-type-2", _logEvent.Properties["Request.Files[test2.aspx].ContentType"].LiteralValue());
+            Assert.AreEqual("test3.aspx", _logEvent.Properties["Request.Files[test3.aspx].FileName"].LiteralValue());
+            Assert.AreEqual(3, _logEvent.Properties["Request.Files[test3.aspx].ContentLength"].LiteralValue());
+            Assert.AreEqual("content-type-3", _logEvent.Properties["Request.Files[test3.aspx].ContentType"].LiteralValue());
         }
 
         [Test]

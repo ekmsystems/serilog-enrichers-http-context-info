@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Web;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Providers;
@@ -89,27 +90,18 @@ namespace Serilog.Enrichers
             propertyFactory
                 .CreateProperty("Request.UserHostName", new ScalarValue(httpRequest.UserHostName))
                 .AddIfAbsent(logEvent);
+            
+            foreach (var property in ExtractLogEventProperties(httpRequest.Files, "Request.Files", propertyFactory))
+                property.AddIfAbsent(logEvent);
 
-            foreach (var key in (httpRequest.Form ?? new NameValueCollection()).AllKeys)
-            {
-                propertyFactory
-                    .CreateProperty($"Request.Form[{key}]", httpRequest.Form[key])
-                    .AddIfAbsent(logEvent);
-            }
+            foreach (var property in ExtractLogEventProperties(httpRequest.Form, "Request.Form", propertyFactory))
+                property.AddIfAbsent(logEvent);
 
-            foreach (var key in (httpRequest.Headers ?? new NameValueCollection()).AllKeys)
-            {
-                propertyFactory
-                    .CreateProperty($"Request.Headers[{key}]", httpRequest.Headers[key])
-                    .AddIfAbsent(logEvent);
-            }
+            foreach (var property in ExtractLogEventProperties(httpRequest.Headers, "Request.Headers", propertyFactory))
+                property.AddIfAbsent(logEvent);
 
-            foreach (var key in (httpRequest.Params ?? new NameValueCollection()).AllKeys)
-            {
-                propertyFactory
-                    .CreateProperty($"Request.Params[{key}]", httpRequest.Params[key])
-                    .AddIfAbsent(logEvent);
-            }
+            foreach (var property in ExtractLogEventProperties(httpRequest.Params, "Request.Params", propertyFactory))
+                property.AddIfAbsent(logEvent);
         }
 
         private static SequenceValue CreateSequence<TSource, TDest>(
@@ -117,6 +109,37 @@ namespace Serilog.Enrichers
             Func<TSource, TDest> converter)
         {
             return new SequenceValue(values.Select(x => new ScalarValue(converter(x))));
+        }
+
+        private static IEnumerable<LogEventProperty> ExtractLogEventProperties(
+            NameValueCollection collection,
+            string propertyNamePrefix,
+            ILogEventPropertyFactory propertyFactory)
+        {
+            return collection?.AllKeys
+                       .Select(key => propertyFactory.CreateProperty($"{propertyNamePrefix}[{key}]", collection[key]))
+                   ?? Enumerable.Empty<LogEventProperty>();
+        }
+
+        private static IEnumerable<LogEventProperty> ExtractLogEventProperties(
+            IHttpFileCollectionWrapper collection,
+            string propertyNamePrefix,
+            ILogEventPropertyFactory propertyFactory)
+        {
+            return collection?.AllKeys
+                       .SelectMany(key => new[]
+                       {
+                           propertyFactory.CreateProperty(
+                               $"{propertyNamePrefix}[{key}].FileName",
+                               collection.Get(key).FileName),
+                           propertyFactory.CreateProperty(
+                               $"{propertyNamePrefix}[{key}].ContentLength",
+                               collection.Get(key).ContentLength),
+                           propertyFactory.CreateProperty(
+                               $"{propertyNamePrefix}[{key}].ContentType",
+                               collection.Get(key).ContentType)
+                       })
+                   ?? Enumerable.Empty<LogEventProperty>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Text;
 using System.Web;
 
@@ -12,6 +13,7 @@ namespace Serilog
         Encoding ContentEncoding { get; }
         int ContentLength { get; }
         string ContentType { get; }
+        NameValueCollection Headers { get; }
         string HttpMethod { get; }
         bool IsAuthenticated { get; }
         bool IsLocal { get; }
@@ -43,6 +45,7 @@ namespace Serilog
         public Encoding ContentEncoding => _httpRequest.ContentEncoding;
         public int ContentLength => _httpRequest.ContentLength;
         public string ContentType => _httpRequest.ContentType;
+        public NameValueCollection Headers => _httpRequest.Headers;
         public string HttpMethod => _httpRequest.HttpMethod;
         public bool IsAuthenticated => _httpRequest.IsAuthenticated;
         public bool IsLocal => _httpRequest.IsLocal;

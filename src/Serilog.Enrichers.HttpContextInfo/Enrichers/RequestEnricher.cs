@@ -88,6 +88,11 @@ namespace Serilog.Enrichers
             propertyFactory
                 .CreateProperty("Request.UserHostName", new ScalarValue(httpRequest.UserHostName))
                 .AddIfAbsent(logEvent);
+
+            foreach (var key in httpRequest.Headers.AllKeys)
+            {
+                propertyFactory.CreateProperty($"Request.Headers[{key}]", httpRequest.Headers[key]).AddIfAbsent(logEvent);
+            }
         }
 
         private static SequenceValue CreateSequence<TSource, TDest>(

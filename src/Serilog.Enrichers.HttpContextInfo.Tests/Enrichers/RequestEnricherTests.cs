@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Specialized;
 using System.Text;
 using Moq;
 using NUnit.Framework;
@@ -138,8 +139,7 @@ namespace Serilog.Tests.Enrichers
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.IsLocal"));
             Assert.AreEqual("True", _logEvent.Properties["Request.IsLocal"].LiteralValue());
         }
-
-
+        
         [Test]
         public void ShouldCreateRequestIsSecureConnectionProperty()
         {
@@ -270,6 +270,29 @@ namespace Serilog.Tests.Enrichers
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.UserHostName"));
             Assert.AreEqual("\"SET\"", _logEvent.Properties["Request.UserHostName"].LiteralValue());
+        }
+
+        [Test]
+        public void ShouldCreateRequestHeaderProperties()
+        {
+            var headers = new NameValueCollection
+            {
+                {"Accept", "application/json"},
+                {"Content-Type", "application/json"},
+                {"User-Agent", "NUnit-Test"}
+            };
+
+            _httpRequestWrapper.SetupGet(x => x.Headers).Returns(headers);
+
+            _logger.Information(@"Has Request.Headers properties");
+
+            Assert.IsNotNull(_logEvent);
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Headers[Accept]"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Headers[Content-Type]"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Headers[User-Agent]"));
+            Assert.AreEqual(headers["Accept"], _logEvent.Properties["Request.Headers[Accept]"].LiteralValue());
+            Assert.AreEqual(headers["Content-Type"], _logEvent.Properties["Request.Headers[Content-Type]"].LiteralValue());
+            Assert.AreEqual(headers["User-Agent"], _logEvent.Properties["Request.Headers[User-Agent]"].LiteralValue());
         }
     }
 }

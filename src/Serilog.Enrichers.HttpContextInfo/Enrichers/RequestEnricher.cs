@@ -90,6 +90,9 @@ namespace Serilog.Enrichers
             propertyFactory
                 .CreateProperty("Request.UserHostName", new ScalarValue(httpRequest.UserHostName))
                 .AddIfAbsent(logEvent);
+
+            foreach (var property in ExtractLogEventProperties(httpRequest.Cookies, "Request.Cookies", propertyFactory))
+                property.AddIfAbsent(logEvent);
             
             foreach (var property in ExtractLogEventProperties(httpRequest.Files, "Request.Files", propertyFactory))
                 property.AddIfAbsent(logEvent);
@@ -118,6 +121,33 @@ namespace Serilog.Enrichers
         {
             return collection?.AllKeys
                        .Select(key => propertyFactory.CreateProperty($"{propertyNamePrefix}[{key}]", collection[key]))
+                   ?? Enumerable.Empty<LogEventProperty>();
+        }
+
+        private static IEnumerable<LogEventProperty> ExtractLogEventProperties(
+            HttpCookieCollection collection,
+            string propertyNamePrefix,
+            ILogEventPropertyFactory propertyFactory)
+        {
+            return collection?.AllKeys
+                       .SelectMany(key => new[]
+                       {
+                           propertyFactory.CreateProperty(
+                               $"{propertyNamePrefix}[{key}].Name",
+                               collection[key].Name),
+                           propertyFactory.CreateProperty(
+                               $"{propertyNamePrefix}[{key}].Value",
+                               collection[key].Value),
+                           propertyFactory.CreateProperty(
+                               $"{propertyNamePrefix}[{key}].Domain",
+                               collection[key].Domain),
+                           propertyFactory.CreateProperty(
+                               $"{propertyNamePrefix}[{key}].Expires",
+                               collection[key].Expires.ToString("u")),
+                           propertyFactory.CreateProperty(
+                               $"{propertyNamePrefix}[{key}].Path",
+                               collection[key].Path)
+                       })
                    ?? Enumerable.Empty<LogEventProperty>();
         }
 

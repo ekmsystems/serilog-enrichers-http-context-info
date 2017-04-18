@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using System.Web;
 using Moq;
 using NUnit.Framework;
 using Serilog.Enrichers;
@@ -288,6 +290,57 @@ namespace Serilog.Tests.Enrichers
         }
 
         [Test]
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
+        public void ShouldCreateRequestCookiesProperties()
+        {
+            var cookies = new HttpCookieCollection
+            {
+                new HttpCookie("test-1", "My First Cookie!"),
+                new HttpCookie("test-2", "My Second Cookie!"),
+                new HttpCookie("test-3", "My Third Cookie!")
+            };
+
+            _httpRequestWrapper.SetupGet(x => x.Cookies).Returns(cookies);
+
+            _logger.Information(@"Has Request.Cookies properties");
+
+            Assert.IsNotNull(_logEvent);
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Cookies[test-1].Name"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Cookies[test-2].Name"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Cookies[test-3].Name"));
+            Assert.AreEqual(cookies["test-1"].Name,
+                _logEvent.Properties["Request.Cookies[test-1].Name"].LiteralValue());
+            Assert.AreEqual(cookies["test-1"].Value,
+                _logEvent.Properties["Request.Cookies[test-1].Value"].LiteralValue());
+            Assert.AreEqual(cookies["test-1"].Domain,
+                _logEvent.Properties["Request.Cookies[test-1].Domain"].LiteralValue());
+            Assert.AreEqual(cookies["test-1"].Expires.ToString("u"),
+                _logEvent.Properties["Request.Cookies[test-1].Expires"].LiteralValue());
+            Assert.AreEqual(cookies["test-1"].Path,
+                _logEvent.Properties["Request.Cookies[test-1].Path"].LiteralValue());
+            Assert.AreEqual(cookies["test-2"].Name,
+                _logEvent.Properties["Request.Cookies[test-2].Name"].LiteralValue());
+            Assert.AreEqual(cookies["test-2"].Value,
+                _logEvent.Properties["Request.Cookies[test-2].Value"].LiteralValue());
+            Assert.AreEqual(cookies["test-2"].Domain,
+                _logEvent.Properties["Request.Cookies[test-2].Domain"].LiteralValue());
+            Assert.AreEqual(cookies["test-2"].Expires.ToString("u"),
+                _logEvent.Properties["Request.Cookies[test-2].Expires"].LiteralValue());
+            Assert.AreEqual(cookies["test-2"].Path,
+                _logEvent.Properties["Request.Cookies[test-2].Path"].LiteralValue());
+            Assert.AreEqual(cookies["test-3"].Name,
+                _logEvent.Properties["Request.Cookies[test-3].Name"].LiteralValue());
+            Assert.AreEqual(cookies["test-3"].Value,
+                _logEvent.Properties["Request.Cookies[test-3].Value"].LiteralValue());
+            Assert.AreEqual(cookies["test-3"].Domain,
+                _logEvent.Properties["Request.Cookies[test-3].Domain"].LiteralValue());
+            Assert.AreEqual(cookies["test-3"].Expires.ToString("u"),
+                _logEvent.Properties["Request.Cookies[test-3].Expires"].LiteralValue());
+            Assert.AreEqual(cookies["test-3"].Path,
+                _logEvent.Properties["Request.Cookies[test-3].Path"].LiteralValue());
+        }
+
+        [Test]
         public void ShouldCreateRequestFilesProperties()
         {
             var collection = new Mock<IHttpFileCollectionWrapper>();
@@ -304,7 +357,7 @@ namespace Serilog.Tests.Enrichers
                 .Setup(x => x.Get(It.IsAny<string>()))
                 .Returns((string key) => files.Single(x => x.Object.FileName == key).Object);
 
-            _logger.Information(@"Has Request.Form properties");
+            _logger.Information(@"Has Request.Files properties");
 
             Assert.IsNotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Files[test1.aspx].FileName"));
@@ -375,7 +428,7 @@ namespace Serilog.Tests.Enrichers
 
             _httpRequestWrapper.SetupGet(x => x.Params).Returns(parameters);
 
-            _logger.Information(@"Has Request.Form properties");
+            _logger.Information(@"Has Request.Params properties");
 
             Assert.IsNotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Params[username]"));

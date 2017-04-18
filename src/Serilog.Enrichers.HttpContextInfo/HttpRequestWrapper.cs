@@ -13,6 +13,7 @@ namespace Serilog
         Encoding ContentEncoding { get; }
         int ContentLength { get; }
         string ContentType { get; }
+        HttpCookieCollection Cookies { get; }
         IHttpFileCollectionWrapper Files { get; }
         NameValueCollection Form { get; }
         NameValueCollection Headers { get; }
@@ -48,6 +49,7 @@ namespace Serilog
         public Encoding ContentEncoding => _httpRequest.ContentEncoding;
         public int ContentLength => _httpRequest.ContentLength;
         public string ContentType => _httpRequest.ContentType;
+        public HttpCookieCollection Cookies => _httpRequest.Cookies;
         public IHttpFileCollectionWrapper Files => new HttpFileCollectionWrapper(_httpRequest.Files);
         public NameValueCollection Form => _httpRequest.Form;
         public NameValueCollection Headers => _httpRequest.Headers;

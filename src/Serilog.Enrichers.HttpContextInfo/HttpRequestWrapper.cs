@@ -12,15 +12,10 @@ namespace Serilog
         Encoding ContentEncoding { get; }
         int ContentLength { get; }
         string ContentType { get; }
-        string CurrentExecutionFilePath { get; }
-        string CurrentExecutionFilePathExtension { get; }
-        string FilePath { get; }
         string HttpMethod { get; }
         bool IsAuthenticated { get; }
         bool IsLocal { get; }
         bool IsSecureConnection { get; }
-        string Path { get; }
-        string PathInfo { get; }
         string PhysicalApplicationPath { get; }
         string PhysicalPath { get; }
         string RawUrl { get; }
@@ -48,15 +43,10 @@ namespace Serilog
         public Encoding ContentEncoding => _httpRequest.ContentEncoding;
         public int ContentLength => _httpRequest.ContentLength;
         public string ContentType => _httpRequest.ContentType;
-        public string CurrentExecutionFilePath => _httpRequest.CurrentExecutionFilePath;
-        public string CurrentExecutionFilePathExtension => _httpRequest.CurrentExecutionFilePathExtension;
-        public string FilePath => _httpRequest.FilePath;
         public string HttpMethod => _httpRequest.HttpMethod;
         public bool IsAuthenticated => _httpRequest.IsAuthenticated;
         public bool IsLocal => _httpRequest.IsLocal;
         public bool IsSecureConnection => _httpRequest.IsSecureConnection;
-        public string Path => _httpRequest.Path;
-        public string PathInfo => _httpRequest.PathInfo;
         public string PhysicalApplicationPath => _httpRequest.PhysicalApplicationPath;
         public string PhysicalPath => _httpRequest.PhysicalPath;
         public string RawUrl => _httpRequest.RawUrl;

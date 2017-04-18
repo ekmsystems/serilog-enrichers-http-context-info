@@ -47,16 +47,6 @@ namespace Serilog.Enrichers
                 .CreateProperty("Request.ContentType", new ScalarValue(httpRequest.ContentType))
                 .AddIfAbsent(logEvent);
             propertyFactory
-                .CreateProperty("Request.CurrentExecutionFilePath", new ScalarValue(httpRequest.CurrentExecutionFilePath))
-                .AddIfAbsent(logEvent);
-            propertyFactory
-                .CreateProperty("Request.CurrentExecutionFilePathExtension",
-                    new ScalarValue(httpRequest.CurrentExecutionFilePathExtension))
-                .AddIfAbsent(logEvent);
-            propertyFactory
-                .CreateProperty("Request.FilePath", new ScalarValue(httpRequest.FilePath))
-                .AddIfAbsent(logEvent);
-            propertyFactory
                 .CreateProperty("Request.HttpMethod", new ScalarValue(httpRequest.HttpMethod))
                 .AddIfAbsent(logEvent);
             propertyFactory
@@ -67,12 +57,6 @@ namespace Serilog.Enrichers
                 .AddIfAbsent(logEvent);
             propertyFactory
                 .CreateProperty("Request.IsSecureConnection", new ScalarValue(httpRequest.IsSecureConnection))
-                .AddIfAbsent(logEvent);
-            propertyFactory
-                .CreateProperty("Request.Path", new ScalarValue(httpRequest.Path))
-                .AddIfAbsent(logEvent);
-            propertyFactory
-                .CreateProperty("Request.PathInfo", new ScalarValue(httpRequest.PathInfo))
                 .AddIfAbsent(logEvent);
             propertyFactory
                 .CreateProperty("Request.PhysicalApplicationPath", new ScalarValue(httpRequest.PhysicalApplicationPath))

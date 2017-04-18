@@ -43,14 +43,7 @@ namespace Serilog
 
         private static object GetPropertyValue(PropertyInfo propertyInfo, object obj)
         {
-            try
-            {
-                return propertyInfo.GetValue(obj, null);
-            }
-            catch
-            {
-                return null;
-            }
+            return propertyInfo.GetValue(obj, null);
         }
     }
 }

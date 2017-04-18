@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using Serilog.Core;
 using Serilog.Events;
@@ -89,9 +90,25 @@ namespace Serilog.Enrichers
                 .CreateProperty("Request.UserHostName", new ScalarValue(httpRequest.UserHostName))
                 .AddIfAbsent(logEvent);
 
-            foreach (var key in httpRequest.Headers.AllKeys)
+            foreach (var key in (httpRequest.Form ?? new NameValueCollection()).AllKeys)
             {
-                propertyFactory.CreateProperty($"Request.Headers[{key}]", httpRequest.Headers[key]).AddIfAbsent(logEvent);
+                propertyFactory
+                    .CreateProperty($"Request.Form[{key}]", httpRequest.Form[key])
+                    .AddIfAbsent(logEvent);
+            }
+
+            foreach (var key in (httpRequest.Headers ?? new NameValueCollection()).AllKeys)
+            {
+                propertyFactory
+                    .CreateProperty($"Request.Headers[{key}]", httpRequest.Headers[key])
+                    .AddIfAbsent(logEvent);
+            }
+
+            foreach (var key in (httpRequest.Params ?? new NameValueCollection()).AllKeys)
+            {
+                propertyFactory
+                    .CreateProperty($"Request.Params[{key}]", httpRequest.Params[key])
+                    .AddIfAbsent(logEvent);
             }
         }
 

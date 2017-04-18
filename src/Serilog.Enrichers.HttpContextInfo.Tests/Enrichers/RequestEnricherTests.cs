@@ -273,7 +273,27 @@ namespace Serilog.Tests.Enrichers
         }
 
         [Test]
-        public void ShouldCreateRequestHeaderProperties()
+        public void ShouldCreateRequestFormProperties()
+        {
+            var form = new NameValueCollection
+            {
+                {"username", "john_smith"},
+                {"password", "mega-secure-password"}
+            };
+
+            _httpRequestWrapper.SetupGet(x => x.Form).Returns(form);
+
+            _logger.Information(@"Has Request.Form properties");
+
+            Assert.IsNotNull(_logEvent);
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Form[username]"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Form[password]"));
+            Assert.AreEqual(form["username"], _logEvent.Properties["Request.Form[username]"].LiteralValue());
+            Assert.AreEqual(form["password"], _logEvent.Properties["Request.Form[password]"].LiteralValue());
+        }
+
+        [Test]
+        public void ShouldCreateRequestHeadersProperties()
         {
             var headers = new NameValueCollection
             {
@@ -293,6 +313,26 @@ namespace Serilog.Tests.Enrichers
             Assert.AreEqual(headers["Accept"], _logEvent.Properties["Request.Headers[Accept]"].LiteralValue());
             Assert.AreEqual(headers["Content-Type"], _logEvent.Properties["Request.Headers[Content-Type]"].LiteralValue());
             Assert.AreEqual(headers["User-Agent"], _logEvent.Properties["Request.Headers[User-Agent]"].LiteralValue());
+        }
+
+        [Test]
+        public void ShouldCreateRequestParamsProperties()
+        {
+            var parameters = new NameValueCollection
+            {
+                {"username", "john_smith"},
+                {"password", "mega-secure-password"}
+            };
+
+            _httpRequestWrapper.SetupGet(x => x.Params).Returns(parameters);
+
+            _logger.Information(@"Has Request.Form properties");
+
+            Assert.IsNotNull(_logEvent);
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Params[username]"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Request.Params[password]"));
+            Assert.AreEqual(parameters["username"], _logEvent.Properties["Request.Params[username]"].LiteralValue());
+            Assert.AreEqual(parameters["password"], _logEvent.Properties["Request.Params[password]"].LiteralValue());
         }
     }
 }

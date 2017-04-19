@@ -4,12 +4,12 @@ namespace Serilog.Providers
 {
     public interface IHttpRequestProvider
     {
-        IHttpRequestWrapper GetCurrentRequest();
+        IHttpRequestWrapper GetRequest();
     }
 
     internal class HttpRequestProvider : IHttpRequestProvider
     {
-        public IHttpRequestWrapper GetCurrentRequest()
+        public IHttpRequestWrapper GetRequest()
         {
             return HttpContext.Current == null
                 ? null

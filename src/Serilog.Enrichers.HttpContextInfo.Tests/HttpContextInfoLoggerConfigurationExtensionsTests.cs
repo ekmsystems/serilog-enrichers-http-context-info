@@ -3,8 +3,6 @@ using NUnit.Framework;
 using Serilog.Configuration;
 using Serilog.Tests.Support;
 
-// ReSharper disable AssignNullToNotNullAttribute
-
 namespace Serilog.Tests
 {
     [TestFixture]
@@ -26,6 +24,7 @@ namespace Serilog.Tests
         public void WithRequest_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
         {
             LoggerEnrichmentConfiguration configuration = null;
+            // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithRequest());
         }
     }

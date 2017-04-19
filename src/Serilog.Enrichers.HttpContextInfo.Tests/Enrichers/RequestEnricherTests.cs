@@ -27,7 +27,7 @@ namespace Serilog.Tests.Enrichers
                 .WriteTo.Sink(new DelegatingSink(e => _logEvent = e))
                 .CreateLogger();
 
-            _httpRequestProvider.Setup(x => x.GetCurrentRequest()).Returns(_httpRequestWrapper.Object);
+            _httpRequestProvider.Setup(x => x.GetRequest()).Returns(_httpRequestWrapper.Object);
         }
 
         private Mock<IHttpRequestProvider> _httpRequestProvider;

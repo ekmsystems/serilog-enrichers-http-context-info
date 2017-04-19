@@ -18,13 +18,13 @@ namespace Serilog.Tests.Providers
         private IHttpRequestProvider _httpRequestProvider;
 
         [Test]
-        public void GetCurrentRequest_ShouldReturnTheCurrentHttpContextRequest()
+        public void GetRequest_ShouldReturnTheCurrentHttpContextRequest()
         {
             var request = new HttpRequest("test", "http://serilog.net/", "");
             var response = new HttpResponse(new StringWriter());
             HttpContext.Current = new HttpContext(request, response);
 
-            var result = _httpRequestProvider.GetCurrentRequest();
+            var result = _httpRequestProvider.GetRequest();
 
             Assert.AreEqual("http://serilog.net/", result.Url.ToString());
         }

@@ -25,7 +25,7 @@ namespace Serilog.Enrichers
 
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
-            var httpRequest = _httpRequestProvider.GetCurrentRequest();
+            var httpRequest = _httpRequestProvider.GetRequest();
 
             if (httpRequest == null)
                 return;

@@ -33,6 +33,42 @@ namespace Serilog.Tests.Enrichers
         private LogEvent _logEvent;
 
         [Test]
+        public void ShouldCreateResponseCacheControlProperty()
+        {
+            _httpResponseWrapper.SetupGet(x => x.CacheControl).Returns("SET");
+
+            _logger.Information(@"Has a Response.CacheControl property");
+
+            Assert.NotNull(_logEvent);
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Response.CacheControl"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Response.CacheControl"].LiteralValue());
+        }
+
+        [Test]
+        public void ShouldCreateResponseContentTypeProperty()
+        {
+            _httpResponseWrapper.SetupGet(x => x.ContentType).Returns("SET");
+
+            _logger.Information(@"Has a Response.ContentType property");
+
+            Assert.NotNull(_logEvent);
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Response.ContentType"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Response.ContentType"].LiteralValue());
+        }
+
+        [Test]
+        public void ShouldCreateResponseRedirectLocationProperty()
+        {
+            _httpResponseWrapper.SetupGet(x => x.RedirectLocation).Returns("SET");
+
+            _logger.Information(@"Has a Response.RedirectLocation property");
+
+            Assert.NotNull(_logEvent);
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Response.RedirectLocation"));
+            Assert.AreEqual("\"SET\"", _logEvent.Properties["Response.RedirectLocation"].LiteralValue());
+        }
+
+        [Test]
         public void ShouldCreateResponseStatusProperty()
         {
             _httpResponseWrapper.SetupGet(x => x.Status).Returns("200 OK");

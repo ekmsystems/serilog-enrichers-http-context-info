@@ -30,6 +30,15 @@ namespace Serilog.Enrichers
                 return;
 
             propertyFactory
+                .CreateProperty("Response.CacheControl", new ScalarValue(httpResponse.CacheControl))
+                .AddIfAbsent(logEvent);
+            propertyFactory
+                .CreateProperty("Response.ContentType", new ScalarValue(httpResponse.ContentType))
+                .AddIfAbsent(logEvent);
+            propertyFactory
+                .CreateProperty("Response.RedirectLocation", new ScalarValue(httpResponse.RedirectLocation))
+                .AddIfAbsent(logEvent);
+            propertyFactory
                 .CreateProperty("Response.Status", new ScalarValue(httpResponse.Status))
                 .AddIfAbsent(logEvent);
             propertyFactory

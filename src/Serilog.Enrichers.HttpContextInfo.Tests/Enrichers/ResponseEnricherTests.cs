@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using System.Collections.Specialized;
+using Moq;
 using NUnit.Framework;
 using Serilog.Enrichers;
 using Serilog.Events;
@@ -51,6 +52,29 @@ namespace Serilog.Tests.Enrichers
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Response.StatusCode"));
             Assert.AreEqual("200", _logEvent.Properties["Response.StatusCode"].LiteralValue());
+        }
+
+        [Test]
+        public void ShouldCreateResponseHeadersProperties()
+        {
+            var headers = new NameValueCollection
+            {
+                {"Accept", "application/json"},
+                {"Content-Type", "application/json"},
+                {"User-Agent", "NUnit-Test"}
+            };
+
+            _httpResponseWrapper.SetupGet(x => x.Headers).Returns(headers);
+
+            _logger.Information(@"Has Response.Headers properties");
+
+            Assert.IsNotNull(_logEvent);
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Response.Headers[Accept]"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Response.Headers[Content-Type]"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Response.Headers[User-Agent]"));
+            Assert.AreEqual(headers["Accept"], _logEvent.Properties["Response.Headers[Accept]"].LiteralValue());
+            Assert.AreEqual(headers["Content-Type"], _logEvent.Properties["Response.Headers[Content-Type]"].LiteralValue());
+            Assert.AreEqual(headers["User-Agent"], _logEvent.Properties["Response.Headers[User-Agent]"].LiteralValue());
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using System.IO;
+﻿using System.Collections.Specialized;
+using System.IO;
 using System.Web;
 
 namespace Serilog
 {
     public interface IHttpResponseWrapper
     {
+        NameValueCollection Headers { get; }
         TextWriter Output { get; }
         string Status { get; }
         int StatusCode { get; }
@@ -19,6 +21,7 @@ namespace Serilog
             _httpResponse = httpResponse;
         }
 
+        public NameValueCollection Headers => _httpResponse.Headers;
         public TextWriter Output => _httpResponse.Output;
         public string Status => _httpResponse.Status;
         public int StatusCode => _httpResponse.StatusCode;

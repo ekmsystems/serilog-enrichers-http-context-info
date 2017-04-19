@@ -12,7 +12,7 @@ To use the enricher, first install the NuGet package:
 Install-Package Serilog.Enrichers.HttpContextInfo
 ```
 
-Then, apply the enricher to you `LoggerConfiguration`:
+Then, apply the enricher to your `LoggerConfiguration`:
 
 ```csharp
 Log.Logger = new LoggerConfiguration()
@@ -27,3 +27,4 @@ The `WithRequest()` enricher will add the current `HttpRequest` properties to pr
 
 The package includes:
  * `WithRequest()` - adds the `HttpRequest` from the current HttpContext.
+ * `WithResponse()` - adds the `HttpResponse` from the current HttpContext.

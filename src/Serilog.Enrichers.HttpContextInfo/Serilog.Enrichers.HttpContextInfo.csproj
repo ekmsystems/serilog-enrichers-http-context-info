@@ -45,7 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\HttpCookieCollectionLogEventPropertyConverter.cs" />
+    <Compile Include="Converters\ILogEventPropertyConverter.cs" />
+    <Compile Include="Converters\NameValueCollectionLogEventPropertyConverter.cs" />
     <Compile Include="Enrichers\RequestEnricher.cs" />
+    <Compile Include="Enrichers\ResponseEnricher.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensions.cs" />
     <Compile Include="HttpFileCollectionWrapper.cs" />
     <Compile Include="HttpPostedFileWrapper.cs" />
@@ -57,10 +61,12 @@
     <Compile Include="HttpResponseWrapper.cs" />
     <Compile Include="LogEventPropertyExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\HttpResponseProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

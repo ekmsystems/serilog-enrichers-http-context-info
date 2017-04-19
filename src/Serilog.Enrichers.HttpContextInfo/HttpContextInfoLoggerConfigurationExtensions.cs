@@ -12,5 +12,12 @@ namespace Serilog
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
             return enrichmentConfiguration.With(new RequestEnricher());
         }
+
+        public static LoggerConfiguration WithResponse(
+            this LoggerEnrichmentConfiguration enrichmentConfiguration)
+        {
+            if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
+            return enrichmentConfiguration.With(new ResponseEnricher());
+        }
     }
 }

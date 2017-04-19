@@ -1,4 +1,6 @@
 ﻿using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
+using System.Web;
 using Moq;
 using NUnit.Framework;
 using Serilog.Enrichers;
@@ -52,6 +54,57 @@ namespace Serilog.Tests.Enrichers
             Assert.NotNull(_logEvent);
             Assert.IsTrue(_logEvent.Properties.ContainsKey("Response.StatusCode"));
             Assert.AreEqual("200", _logEvent.Properties["Response.StatusCode"].LiteralValue());
+        }
+
+        [Test]
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
+        public void ShouldCreateResponseCookiesProperties()
+        {
+            var cookies = new HttpCookieCollection
+            {
+                new HttpCookie("test-1", "My First Cookie!"),
+                new HttpCookie("test-2", "My Second Cookie!"),
+                new HttpCookie("test-3", "My Third Cookie!")
+            };
+
+            _httpResponseWrapper.SetupGet(x => x.Cookies).Returns(cookies);
+
+            _logger.Information(@"Has Response.Cookies properties");
+
+            Assert.IsNotNull(_logEvent);
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Response.Cookies[test-1].Name"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Response.Cookies[test-2].Name"));
+            Assert.IsTrue(_logEvent.Properties.ContainsKey("Response.Cookies[test-3].Name"));
+            Assert.AreEqual(cookies["test-1"].Name,
+                _logEvent.Properties["Response.Cookies[test-1].Name"].LiteralValue());
+            Assert.AreEqual(cookies["test-1"].Value,
+                _logEvent.Properties["Response.Cookies[test-1].Value"].LiteralValue());
+            Assert.AreEqual(cookies["test-1"].Domain,
+                _logEvent.Properties["Response.Cookies[test-1].Domain"].LiteralValue());
+            Assert.AreEqual(cookies["test-1"].Expires.ToString("u"),
+                _logEvent.Properties["Response.Cookies[test-1].Expires"].LiteralValue());
+            Assert.AreEqual(cookies["test-1"].Path,
+                _logEvent.Properties["Response.Cookies[test-1].Path"].LiteralValue());
+            Assert.AreEqual(cookies["test-2"].Name,
+                _logEvent.Properties["Response.Cookies[test-2].Name"].LiteralValue());
+            Assert.AreEqual(cookies["test-2"].Value,
+                _logEvent.Properties["Response.Cookies[test-2].Value"].LiteralValue());
+            Assert.AreEqual(cookies["test-2"].Domain,
+                _logEvent.Properties["Response.Cookies[test-2].Domain"].LiteralValue());
+            Assert.AreEqual(cookies["test-2"].Expires.ToString("u"),
+                _logEvent.Properties["Response.Cookies[test-2].Expires"].LiteralValue());
+            Assert.AreEqual(cookies["test-2"].Path,
+                _logEvent.Properties["Response.Cookies[test-2].Path"].LiteralValue());
+            Assert.AreEqual(cookies["test-3"].Name,
+                _logEvent.Properties["Response.Cookies[test-3].Name"].LiteralValue());
+            Assert.AreEqual(cookies["test-3"].Value,
+                _logEvent.Properties["Response.Cookies[test-3].Value"].LiteralValue());
+            Assert.AreEqual(cookies["test-3"].Domain,
+                _logEvent.Properties["Response.Cookies[test-3].Domain"].LiteralValue());
+            Assert.AreEqual(cookies["test-3"].Expires.ToString("u"),
+                _logEvent.Properties["Response.Cookies[test-3].Expires"].LiteralValue());
+            Assert.AreEqual(cookies["test-3"].Path,
+                _logEvent.Properties["Response.Cookies[test-3].Path"].LiteralValue());
         }
 
         [Test]

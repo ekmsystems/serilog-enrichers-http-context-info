@@ -6,6 +6,7 @@ namespace Serilog
 {
     public interface IHttpResponseWrapper
     {
+        HttpCookieCollection Cookies { get; }
         NameValueCollection Headers { get; }
         TextWriter Output { get; }
         string Status { get; }
@@ -21,6 +22,7 @@ namespace Serilog
             _httpResponse = httpResponse;
         }
 
+        public HttpCookieCollection Cookies => _httpResponse.Cookies;
         public NameValueCollection Headers => _httpResponse.Headers;
         public TextWriter Output => _httpResponse.Output;
         public string Status => _httpResponse.Status;

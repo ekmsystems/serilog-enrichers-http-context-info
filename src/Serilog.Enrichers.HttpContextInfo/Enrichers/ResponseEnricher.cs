@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Web;
 using Serilog.Converters;
 using Serilog.Core;
 using Serilog.Events;
@@ -35,6 +36,9 @@ namespace Serilog.Enrichers
                 .CreateProperty("Response.StatusCode", new ScalarValue(httpResponse.StatusCode))
                 .AddIfAbsent(logEvent);
 
+            foreach (var property in ExtractLogEventProperties(httpResponse.Cookies, "Response.Cookies", propertyFactory))
+                property.AddIfAbsent(logEvent);
+
             foreach (var property in ExtractLogEventProperties(httpResponse.Headers, "Response.Headers", propertyFactory))
                 property.AddIfAbsent(logEvent);
         }
@@ -45,6 +49,15 @@ namespace Serilog.Enrichers
             ILogEventPropertyFactory propertyFactory)
         {
             var converter = new NameValueCollectionLogEventPropertyConverter(propertyFactory, propertyName);
+            return converter.Convert(collection);
+        }
+
+        private static IEnumerable<LogEventProperty> ExtractLogEventProperties(
+            HttpCookieCollection collection,
+            string propertyName,
+            ILogEventPropertyFactory propertyFactory)
+        {
+            var converter = new HttpCookieCollectionLogEventPropertyConverter(propertyFactory, propertyName);
             return converter.Convert(collection);
         }
     }

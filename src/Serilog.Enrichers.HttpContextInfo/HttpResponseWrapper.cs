@@ -6,6 +6,8 @@ namespace Serilog
     public interface IHttpResponseWrapper
     {
         TextWriter Output { get; }
+        string Status { get; }
+        int StatusCode { get; }
     }
 
     internal class HttpResponseWrapper : IHttpResponseWrapper
@@ -18,5 +20,7 @@ namespace Serilog
         }
 
         public TextWriter Output => _httpResponse.Output;
+        public string Status => _httpResponse.Status;
+        public int StatusCode => _httpResponse.StatusCode;
     }
 }

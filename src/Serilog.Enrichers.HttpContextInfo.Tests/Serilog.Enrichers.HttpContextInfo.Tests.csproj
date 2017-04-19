@@ -66,6 +66,7 @@
     <Compile Include="Enrichers\RequestEnricherTests.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensionsTests.cs" />
     <Compile Include="ObjectToLogEventPropertyBuilderTests.cs" />
+    <Compile Include="Providers\HttpResponseProviderTests.cs" />
     <Compile Include="Providers\HttpRequestProviderTests.cs" />
     <Compile Include="Providers\HttpContextProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

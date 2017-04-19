@@ -57,6 +57,7 @@
     <Compile Include="HttpResponseWrapper.cs" />
     <Compile Include="LogEventPropertyExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\HttpResponseProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\HttpCookieCollectionLogEventPropertyConverter.cs" />
     <Compile Include="Converters\ILogEventPropertyConverter.cs" />
     <Compile Include="Converters\NameValueCollectionLogEventPropertyConverter.cs" />
     <Compile Include="Enrichers\RequestEnricher.cs" />

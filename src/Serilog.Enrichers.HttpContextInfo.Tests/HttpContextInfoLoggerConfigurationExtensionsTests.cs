@@ -27,5 +27,24 @@ namespace Serilog.Tests
             // ReSharper disable once ExpressionIsAlwaysNull
             Assert.Throws<ArgumentNullException>(() => configuration.WithRequest());
         }
+
+        [Test]
+        public void WithResponse_ThenLoggerIsCalled_ShouldNotThrowException()
+        {
+            var logger = new LoggerConfiguration()
+                .Enrich.WithResponse()
+                .WriteTo.Sink(new DelegatingSink(e => { }))
+                .CreateLogger();
+
+            Assert.DoesNotThrow(() => logger.Information("LOG"));
+        }
+
+        [Test]
+        public void WithResponse_WhenLoggerEnrichmentConfigurationIsNull_ShouldThrowArgumentNullException()
+        {
+            LoggerEnrichmentConfiguration configuration = null;
+            // ReSharper disable once ExpressionIsAlwaysNull
+            Assert.Throws<ArgumentNullException>(() => configuration.WithResponse());
+        }
     }
 }

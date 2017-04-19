@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
+using Serilog.Converters;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Providers;
@@ -116,57 +117,38 @@ namespace Serilog.Enrichers
 
         private static IEnumerable<LogEventProperty> ExtractLogEventProperties(
             NameValueCollection collection,
-            string propertyNamePrefix,
+            string propertyName,
             ILogEventPropertyFactory propertyFactory)
         {
-            return collection?.AllKeys
-                       .Select(key => propertyFactory.CreateProperty($"{propertyNamePrefix}[{key}]", collection[key]))
-                   ?? Enumerable.Empty<LogEventProperty>();
+            var converter = new NameValueCollectionLogEventPropertyConverter(propertyFactory, propertyName);
+            return converter.Convert(collection);
         }
 
         private static IEnumerable<LogEventProperty> ExtractLogEventProperties(
             HttpCookieCollection collection,
-            string propertyNamePrefix,
+            string propertyName,
             ILogEventPropertyFactory propertyFactory)
         {
-            return collection?.AllKeys
-                       .SelectMany(key => new[]
-                       {
-                           propertyFactory.CreateProperty(
-                               $"{propertyNamePrefix}[{key}].Name",
-                               collection[key].Name),
-                           propertyFactory.CreateProperty(
-                               $"{propertyNamePrefix}[{key}].Value",
-                               collection[key].Value),
-                           propertyFactory.CreateProperty(
-                               $"{propertyNamePrefix}[{key}].Domain",
-                               collection[key].Domain),
-                           propertyFactory.CreateProperty(
-                               $"{propertyNamePrefix}[{key}].Expires",
-                               collection[key].Expires.ToString("u")),
-                           propertyFactory.CreateProperty(
-                               $"{propertyNamePrefix}[{key}].Path",
-                               collection[key].Path)
-                       })
-                   ?? Enumerable.Empty<LogEventProperty>();
+            var converter = new HttpCookieCollectionLogEventPropertyConverter(propertyFactory, propertyName);
+            return converter.Convert(collection);
         }
 
         private static IEnumerable<LogEventProperty> ExtractLogEventProperties(
             IHttpFileCollectionWrapper collection,
-            string propertyNamePrefix,
+            string propertyName,
             ILogEventPropertyFactory propertyFactory)
         {
             return collection?.AllKeys
                        .SelectMany(key => new[]
                        {
                            propertyFactory.CreateProperty(
-                               $"{propertyNamePrefix}[{key}].FileName",
+                               $"{propertyName}[{key}].FileName",
                                collection.Get(key).FileName),
                            propertyFactory.CreateProperty(
-                               $"{propertyNamePrefix}[{key}].ContentLength",
+                               $"{propertyName}[{key}].ContentLength",
                                collection.Get(key).ContentLength),
                            propertyFactory.CreateProperty(
-                               $"{propertyNamePrefix}[{key}].ContentType",
+                               $"{propertyName}[{key}].ContentType",
                                collection.Get(key).ContentType)
                        })
                    ?? Enumerable.Empty<LogEventProperty>();

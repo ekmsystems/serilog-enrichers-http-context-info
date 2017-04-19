@@ -63,6 +63,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Converters\NameValueCollectionLogEventPropertyConverterTests.cs" />
     <Compile Include="Enrichers\RequestEnricherTests.cs" />
     <Compile Include="Enrichers\ResponseEnricherTests.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensionsTests.cs" />

@@ -64,6 +64,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Enrichers\RequestEnricherTests.cs" />
+    <Compile Include="Enrichers\ResponseEnricherTests.cs" />
     <Compile Include="HttpContextInfoLoggerConfigurationExtensionsTests.cs" />
     <Compile Include="ObjectToLogEventPropertyBuilderTests.cs" />
     <Compile Include="Providers\HttpResponseProviderTests.cs" />

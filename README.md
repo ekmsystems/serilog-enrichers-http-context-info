@@ -2,9 +2,9 @@
 
 Enrich Serilog log events with properties from the current HttpContext.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/l60gff79t9hs6vqo?svg=true)](https://ci.appveyor.com/project/mrstebo/serilog-enrichers-http-context-info)
+[![Build status](https://ci.appveyor.com/api/projects/status/s9yu6rmpts96rk6f/branch/master?svg=true)](https://ci.appveyor.com/project/mrstebo/serilog-enrichers-http-context-info/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/mrstebo/serilog-enrichers-http-context-info/badge.svg?branch=master)](https://coveralls.io/github/mrstebo/serilog-enrichers-http-context-info?branch=master)
-[![NuGet Version](http://img.shields.io/nuget/v/Serilog.Enrichers.HttpContextInfo.svg?style=flat)](https://www.nuget.org/packages/Serilog.Enrichers.HttpContextInfo/)
+[![NuGet](http://img.shields.io/nuget/v/Serilog.Enrichers.HttpContextInfo.svg?style=flat)](https://www.nuget.org/packages/Serilog.Enrichers.HttpContextInfo/)
 
 To use the enricher, first install the NuGet package:
 

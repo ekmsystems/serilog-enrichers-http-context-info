@@ -64,6 +64,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Converters\HttpCookieCollectionLogEventPropertyConverterTests.cs" />
+    <Compile Include="Converters\HttpFileCollectionWrapperLogEventPropertyConverterTests.cs" />
     <Compile Include="Converters\NameValueCollectionLogEventPropertyConverterTests.cs" />
     <Compile Include="Enrichers\RequestEnricherTests.cs" />
     <Compile Include="Enrichers\ResponseEnricherTests.cs" />

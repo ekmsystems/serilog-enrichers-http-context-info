@@ -20,11 +20,11 @@ namespace Serilog.Converters
 
         public IEnumerable<LogEventProperty> Convert(IHttpFileCollectionWrapper obj)
         {
-            return obj?.AllKeys.SelectMany(key => CreateProperty(key, obj.Get(key))) ??
+            return obj?.AllKeys.SelectMany(key => CreateProperties(key, obj.Get(key))) ??
                    Enumerable.Empty<LogEventProperty>();
         }
 
-        private IEnumerable<LogEventProperty> CreateProperty(string key, IHttpPostedFileWrapper file)
+        private IEnumerable<LogEventProperty> CreateProperties(string key, IHttpPostedFileWrapper file)
         {
             yield return _propertyFactory.CreateProperty($"{_propertyName}[{key}].FileName", file.FileName);
             yield return _propertyFactory.CreateProperty($"{_propertyName}[{key}].ContentLength", file.ContentLength);

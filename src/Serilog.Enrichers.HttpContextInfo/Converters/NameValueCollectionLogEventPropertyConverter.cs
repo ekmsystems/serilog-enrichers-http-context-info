@@ -21,9 +21,13 @@ namespace Serilog.Converters
 
         public IEnumerable<LogEventProperty> Convert(NameValueCollection obj)
         {
-            return obj?.AllKeys
-                       .Select(key => _propertyFactory.CreateProperty($"{_propertyName}[{key}]", obj[key]))
+            return obj?.AllKeys.Select(key => CreateProperty(key, obj.Get(key)))
                    ?? Enumerable.Empty<LogEventProperty>();
+        }
+
+        private LogEventProperty CreateProperty(string key, string value)
+        {
+            return _propertyFactory.CreateProperty($"{_propertyName}[{key}]", value);
         }
     }
 }

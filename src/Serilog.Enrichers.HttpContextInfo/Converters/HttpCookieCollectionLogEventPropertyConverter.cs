@@ -21,26 +21,22 @@ namespace Serilog.Converters
 
         public IEnumerable<LogEventProperty> Convert(HttpCookieCollection obj)
         {
-            return obj?.AllKeys
-                       .SelectMany(key => new[]
-                       {
-                           _propertyFactory.CreateProperty(
-                               $"{_propertyName}[{key}].Name",
-                               obj[key].Name),
-                           _propertyFactory.CreateProperty(
-                               $"{_propertyName}[{key}].Value",
-                               obj[key].Value),
-                           _propertyFactory.CreateProperty(
-                               $"{_propertyName}[{key}].Domain",
-                               obj[key].Domain),
-                           _propertyFactory.CreateProperty(
-                               $"{_propertyName}[{key}].Expires",
-                               obj[key].Expires.ToString("u")),
-                           _propertyFactory.CreateProperty(
-                               $"{_propertyName}[{key}].Path",
-                               obj[key].Path)
-                       })
+            return obj?.AllKeys.SelectMany(key => CreateProperties(key, obj.Get(key)))
                    ?? Enumerable.Empty<LogEventProperty>();
+        }
+
+        private IEnumerable<LogEventProperty> CreateProperties(string key, HttpCookie httpCookie)
+        {
+            yield return _propertyFactory
+                .CreateProperty($"{_propertyName}[{key}].Name", httpCookie.Name);
+            yield return _propertyFactory
+                .CreateProperty($"{_propertyName}[{key}].Value", httpCookie.Value);
+            yield return _propertyFactory
+                .CreateProperty($"{_propertyName}[{key}].Domain", httpCookie.Domain);
+            yield return _propertyFactory
+                .CreateProperty($"{_propertyName}[{key}].Expires", httpCookie.Expires.ToString("u"));
+            yield return _propertyFactory
+                .CreateProperty($"{_propertyName}[{key}].Path", httpCookie.Path);
         }
     }
 }

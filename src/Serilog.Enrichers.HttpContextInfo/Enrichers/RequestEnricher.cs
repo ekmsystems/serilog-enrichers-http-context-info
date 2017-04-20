@@ -138,20 +138,8 @@ namespace Serilog.Enrichers
             string propertyName,
             ILogEventPropertyFactory propertyFactory)
         {
-            return collection?.AllKeys
-                       .SelectMany(key => new[]
-                       {
-                           propertyFactory.CreateProperty(
-                               $"{propertyName}[{key}].FileName",
-                               collection.Get(key).FileName),
-                           propertyFactory.CreateProperty(
-                               $"{propertyName}[{key}].ContentLength",
-                               collection.Get(key).ContentLength),
-                           propertyFactory.CreateProperty(
-                               $"{propertyName}[{key}].ContentType",
-                               collection.Get(key).ContentType)
-                       })
-                   ?? Enumerable.Empty<LogEventProperty>();
+            var converter = new HttpFileCollectionWrapperLogEventPropertyConverter(propertyFactory, propertyName);
+            return converter.Convert(collection);
         }
     }
 }

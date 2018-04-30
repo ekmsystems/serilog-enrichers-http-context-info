@@ -11,12 +11,10 @@ addons:
     packages:
     - dotnet-hostfxr-1.0.1
     - dotnet-sharedframework-microsoft.netcore.app-1.0.5
-install:
-  - curl -L -o nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-  - mono nuget.exe install CoberturaConverter.CommandLine -Version 1.0.1 -OutputDirectory ./src/Serilog.Enrichers.HttpContextInfo.Core.Tests/converter
 script:
  - cd src/Serilog.Enrichers.HttpContextInfo.Core
  - dotnet build
  - cd ../Serilog.Enrichers.HttpContextInfo.Core.Tests
+ - dotnet restore
  - dotnet test --logger "trx;LogFileName=test_results.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
- - dotnet ./converter/CoberturaConverter.CommandLine.1.0.1/tools/netcoreapp2.0/CoberturaConverter.CommandLine.dll --input coverage.xml --output cobertura_report.xml -s OpenCover
+ - dotnet  ~/.nuget/packages/coberturaconverter.commandline/1.0.1/tools/netcoreapp2.0/CoberturaConverter.CommandLine.dll --input coverage.xml --output cobertura_report.xml -s OpenCover

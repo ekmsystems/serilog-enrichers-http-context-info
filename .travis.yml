@@ -11,7 +11,11 @@ addons:
     packages:
     - dotnet-hostfxr-1.0.1
     - dotnet-sharedframework-microsoft.netcore.app-1.0.5
-
+install:
+  - nuget install NUnit.ConsoleRunner -Version 3.8.0 -OutputDirectory src/Serilog.Enrichers.HttpContextInfo.Core.Tests/testrunner
 script:
  - cd src/Serilog.Enrichers.HttpContextInfo.Core
  - dotnet build
+ - cd ../Serilog.Enrichers.HttpContextInfo.Core.Tests
+ - dotnet test --logger "trx;LogFileName=test_results.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+ - dotnet ./converter/CoberturaConverter.CommandLine.1.0.1/tools/netcoreapp2.0/CoberturaConverter.CommandLine.dll --input coverage.xml --output cobertura_report.xml -s OpenCover

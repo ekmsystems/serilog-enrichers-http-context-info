@@ -1,0 +1,6 @@
+language: csharp
+mono: none
+dotnet: 2.0
+script:
+ - cd Serilog.Enrichers.HttpContextInfo.Core
+ - dotnet build

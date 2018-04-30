@@ -10,6 +10,7 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.10.0"/>
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2"/>
     <PackageReference Include="CoberturaConverter.CommandLine" Version="1.0.1"/>
+    <PackageReference Include="coverlet.msbuild" Version="1.1.1"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Serilog.Enrichers.HttpContextInfo.Core\Serilog.Enrichers.HttpContextInfo.Core.csproj"/>

@@ -12,7 +12,7 @@ addons:
     - dotnet-hostfxr-1.0.1
     - dotnet-sharedframework-microsoft.netcore.app-1.0.5
 install:
-  - nuget install NUnit.ConsoleRunner -Version 3.8.0 -OutputDirectory src/Serilog.Enrichers.HttpContextInfo.Core.Tests/testrunner
+  - nuget install CoberturaConverter.CommandLine -Version 1.0.1 -OutputDirectory ./converter
 script:
  - cd src/Serilog.Enrichers.HttpContextInfo.Core
  - dotnet build

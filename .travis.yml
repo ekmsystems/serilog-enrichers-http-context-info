@@ -12,7 +12,8 @@ addons:
     - dotnet-hostfxr-1.0.1
     - dotnet-sharedframework-microsoft.netcore.app-1.0.5
 install:
-  - nuget install CoberturaConverter.CommandLine -Version 1.0.1 -OutputDirectory ./src/Serilog.Enrichers.HttpContextInfo.Core.Tests/converter
+  - curl -L -o nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+  - mono nuget.exe install CoberturaConverter.CommandLine -Version 1.0.1 -OutputDirectory ./src/Serilog.Enrichers.HttpContextInfo.Core.Tests/converter
 script:
  - cd src/Serilog.Enrichers.HttpContextInfo.Core
  - dotnet build
